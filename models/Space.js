@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const spaceSchema = new Schema({
-  title:String,
-  owner: Schema.Type.ObjectId,
+  title: String,
+  owner: Schema.Types.ObjectId,
   nodes: [Object],
   area: [Number], // H x W
 })
