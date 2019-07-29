@@ -17,8 +17,9 @@ export default class Login extends Component {
   handleSubmit = e => {
     e.preventDefault()
     console.log('submit')
-    axios.post('/auth/login', { username: this.state.username, password: this.state.password }).then(data => {
-      console.log(data)
+    axios.post('/auth/login', { username: this.state.username, password: this.state.password }).then(response => {
+      this.props.setUser(response.data);
+      this.props.history.push(`/user/${response.data.username}`)
     }).catch(err => console.log(err))
 
   }

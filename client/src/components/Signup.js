@@ -20,12 +20,11 @@ export default class Login extends Component {
     axios.post('/auth/signup', { username: this.state.username, password: this.state.password }).then(data => {
       console.log(data)
     }).catch(err => console.log(err))
-
   }
   render() {
     return (
       <div>
-        <h1>login</h1>
+        <h1>Sign up</h1>
         <form method="post" onSubmit={this.handleSubmit}>
 
           <label htmlFor="username" name='username'>Username:</label>

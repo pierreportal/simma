@@ -5,6 +5,7 @@ const User = require("../models/User");
 const Space = require('../models/Space.js')
 
 router.get('/:userName', (req, res) => {
+  console.log(req.params.userName)
   User.findOne({ username: req.params.userName }).then(data => {
     res.json(data)
   }).catch(err => {
@@ -31,9 +32,10 @@ router.get('/porfolio', (req, res) => {
   });
 });
 
-router.post('/portfolio', (req, res) => {
-  const nodes = req.body.nodes
-  Space.create({ owner: req.user, nodes: nodes }).then(response => {
+router.post('/:userName/new-space', (req, res) => {
+  const { space, spaceName } = req.body
+  console.log(space, spaceName)
+  Space.create({ owner: req.user._id, nodes: space, title: spaceName }).then(response => {
     res.json(response)
   }).catch(err => {
     res.json(err)
