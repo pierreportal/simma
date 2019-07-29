@@ -31,3 +31,193 @@
     transform: rotate(360deg);
   }
 }
+
+/* calles css */
+
+@font-face {
+  font-family: "Favorit Light";
+  src: url("Favorit-Light.woff2") format("woff2"),
+    url("Favorit-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Favorit";
+  src: url("Favorit-Medium.woff2") format("woff2"),
+    url("Favorit-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "pressura_light";
+  src: url("gt-pressura-pro-mono-light-webfont.woff2") format("woff2"),
+    url("gt-pressura-pro-mono-light-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "pressura_reg";
+  src: url("gt-pressura-pro-mono-regular-webfont.woff2") format("woff2"),
+    url("gt-pressura-pro-mono-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+#stars {
+  font-family: "Favorit Light";
+  width: 100vw;
+  height: 100vh;
+  word-break: break-all;
+  color: rgba(255, 255, 255, 0.562);
+  opacity: 0.8;
+  text-align: center;
+
+  font-size: 16px;
+  line-height: 7rem;
+  z-index: 5;
+}
+
+body {
+  width: 98.5vw;
+  height: 98vh;
+  display: flex;
+  word-break: break-all;
+  border: 10px solid black;
+  box-shadow: 0 0 0 2000px black;
+  border-radius: 35px;
+  overflow: hidden;
+  margin: 0px;
+  /* cursor: none; */
+  background-image: linear-gradient(
+    to right,
+    rgb(0, 252, 147),
+    rgb(0, 68, 255)
+  );
+
+  /* background-image: url("https://cdm.link/files/2012/01/teenage-1.jpg"); */
+}
+
+#stars {
+  word-break: break-all;
+  text-align: left;
+}
+
+.arrow {
+  display: inline-flex;
+  justify-content: center;
+  width: 7vw;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+  z-index: 20;
+  /* border: 1px solid blue; */
+  /* box-shadow: 5px 5px 50px blue; */
+}
+
+.arrow1 {
+  position: relative;
+  left: 0;
+  top: 0;
+  margin-top: 20px;
+}
+.arrow2 {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 20px;
+}
+.arrow3 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 20px;
+}
+.arrow4 {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 20px;
+}
+
+.hole {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  width: 300px;
+  height: 300px;
+  -webkit-filter: blur(60px);
+  z-index: 0;
+  border-radius: 50%;
+  box-shadow: 20px 10px 20px 20000px rgba(0, 0, 0, 0.95);
+}
+
+.listcontainer {
+  font-family: "pressura_reg";
+  font-size: 0.6rem;
+  text-align: right;
+  color: yellow;
+  right: 0px;
+  top: 130px;
+  z-index: 30;
+  position: absolute;
+  margin-right: 40px;
+  cursor: pointer;
+  opacity: 1;
+  list-style: none;
+}
+.list {
+  height: 60vh;
+  overflow-y: scroll;
+  list-style: none;
+}
+
+.box {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+}
+
+.spin .square {
+  position: absolute;
+  z-index: -10;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  margin: -60px 0 0 -60px;
+  -webkit-animation: spin 3s ease-in infinite;
+  -moz-animation: spin 3s linear infinite;
+  animation: spin 3s linear infinite;
+}
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.buttonbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addbutton {
+  z-index: 40;
+  max-width: 50%;
+}
