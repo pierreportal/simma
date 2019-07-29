@@ -5,7 +5,7 @@ const spaceSchema = new Schema({
   title: String,
   owner: Schema.Types.ObjectId,
   nodes: [Object],
-  area: [Number], // H x W
+  // area: [Number], // H x W
 })
 
 const Space = mongoose.model('Space', spaceSchema)

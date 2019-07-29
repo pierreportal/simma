@@ -6,11 +6,12 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const Space = require("../models/Space")
 
 const bcryptSalt = 10;
 
 mongoose
-  .connect('mongodb://localhost/server', {useNewUrlParser: true})
+  .connect('mongodb://localhost/server', { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -30,18 +31,35 @@ let users = [
 ]
 
 User.deleteMany()
-.then(() => {
-  return User.create(users)
-})
-.then(usersCreated => {
-  console.log(`${usersCreated.length} users created with the following id:`);
-  console.log(usersCreated.map(u => u._id));
-})
-.then(() => {
-  // Close properly the connection to Mongoose
-  mongoose.disconnect()
-})
-.catch(err => {
-  mongoose.disconnect()
-  throw err
-})
+  .then(() => {
+    return User.create(users)
+  })
+  .then(usersCreated => {
+    console.log(`${usersCreated.length} users created with the following id:`);
+    console.log(usersCreated.map(u => u._id));
+  })
+  .then(() => {
+    // Close properly the connection to Mongoose
+    mongoose.disconnect()
+  })
+  .catch(err => {
+    mongoose.disconnect()
+    throw err
+  })
+
+
+
+// const notes = ['G#/Ab', 'An', 'A#/Bb', 'Bn/Cb', 'B#/Cn', 'C#/Db', 'Dn', 'D#/Eb', 'En/Fb', 'E#/Fn', 'F#/Gb', 'Gn']
+// const spaces = [
+//   {
+//     space: [
+//       {
+//         note: notes[Math.floor(Math.random() * notes.length)],
+//         position: [Math.random() * 800, Math.random() * 800],
+//         // id:'gdfshahjklskd',
+//         flavor: 'vanilla',
+//         octave: 2
+//       },
+//     ]
+//   }
+// ]

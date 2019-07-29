@@ -3,10 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter as Router } from 'react-router-dom';
+import axios from 'axios'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+axios
+  .get("/auth/loggedin")
+  .then(response => {
+    ReactDOM.render(
+      // axios check user 
+      <Router>
+        <App user={response.data} />
+      </Router>,
+      // end
+      document.getElementById('root'));
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
