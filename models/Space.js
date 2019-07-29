@@ -5,6 +5,7 @@ const spaceSchema = new Schema({
   title: String,
   owner: Schema.Types.ObjectId,
   nodes: [Object],
+  ownerName: String
   // area: [Number], // H x W
 })
 

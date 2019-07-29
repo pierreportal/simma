@@ -5,7 +5,8 @@ import SpaceRow from '../edit-mode/SpaceRow';
 export default class Profile extends Component {
     state = {
         user: this.props.user,
-        portfolio: []
+        portfolio: [],
+        otherSpaces: []
     }
     componentDidMount = () => {
         axios.get(`/user/${this.props.user.username}`).then((response) => {
@@ -13,15 +14,23 @@ export default class Profile extends Component {
                 portfolio: this.state.portfolio.concat(response.data)
             })
         }).catch(err => console.log(err))
+        // axios.get(`/user/getall/${this.props.user.username}`).then(response => {
+        //     this.setState({
+        //         otherSpaces: this.state.otherSpaces.concat(response.data)
+        //     })
+        // })
     }
     render() {
 
         const portfolio = this.state.portfolio.map(x => {
-            // return <li key={x._id}>{x.title}</li>
             return <SpaceRow key={x._id} space={x} username={this.state.user.username} />
         })
 
-        console.log(this.state.portfolio)
+        // const otherSpaces = this.state.otherSpaces.map(x => {
+        //     return <h4>{x.title}</h4>
+        // })
+
+
         return (
             <div>
                 <h2>{this.state.user.username}</h2>
@@ -29,6 +38,7 @@ export default class Profile extends Component {
                     <h3>My spaces</h3>
 
                     {portfolio}
+                    {/* {otherSpaces} */}
 
                 </div>
 
