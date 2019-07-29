@@ -8,7 +8,6 @@ export default class SpaceMap extends Component {
     nodes: []
   }
   distance = e => {
-    // console.log(e.clientX, e.clientY)
     this.state.nodes && this.setState({
       nodes: this.state.nodes.map(n => {
         let dist = Math.sqrt(Math.pow((n.position[0] - e.clientX), 2) + Math.pow((n.position[1] - e.clientY), 2))
@@ -16,7 +15,7 @@ export default class SpaceMap extends Component {
         if (zone) {
           n.start = true;
           n.amp = ((150 - dist) / 150).toFixed(1)
-          // console.log(n)
+          console.log(n.amp, n.note, n.flavor)
         } else {
           n.start = false;
           n.amp = 0
@@ -26,7 +25,6 @@ export default class SpaceMap extends Component {
     })
   }
   componentDidMount = () => {
-    // console.log(this.props.match.params)
     const { userName, spaceName } = this.props.match.params
     this.setState({ username: userName })
     axios.get(`/user/${userName}/${spaceName}`).then(response => {
@@ -41,7 +39,7 @@ export default class SpaceMap extends Component {
     const nodes = this.state.nodes.map(n => {
       return <div key={n.id} style={{ position: 'absolute', left: n.position[0], top: n.position[1] }}>{n.amp}</div>
     })
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseMove={this.distance} >
         <h4>{this.state.title} by {this.state.username}</h4>
