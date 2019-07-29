@@ -7,6 +7,7 @@ import Signup from './components/Signup'
 import Protected from "./components/Protected";
 import Profile from "./components/Profile";
 import EditMap from "./edit-mode/EditMap"
+import SpaceMap from "./edit-mode/SpaceMap"
 
 class App extends React.Component {
   state = {
@@ -24,10 +25,18 @@ class App extends React.Component {
         <h1>Simma</h1>
         <Navbar user={this.state.user} />
         <Switch>
-
           <Route path='/login' render={(props) => <Login user={this.state.user} setUser={this.setUser} {...props} />} />
 
           <Route path='/signup' component={Signup} />
+
+          <Route path='/logout' component={Login} />
+
+          {/*
+            ACCESS SPACE AND DISPLAY, DISTANCE FUNCTION NOT WORKING ON ROBERT'S COMPUTER
+            */}
+
+
+
 
 
           <Protected exact path="/user/:userName" redirectPath="/login"
@@ -39,6 +48,8 @@ class App extends React.Component {
             setUser={this.setUser}
             user={this.state.user}
             component={EditMap} />
+
+          <Route exact path='/user/:userName/:spaceName' component={SpaceMap} />
 
         </Switch>
       </div>

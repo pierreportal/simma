@@ -13,16 +13,16 @@ router.get('/:userName', (req, res) => {
   }).catch(err => console.log(err))
 });
 
-router.put('/settings', (req, res) => {
-  const { username, followingUsers, favoriteSpaces, portfolio } = req.body
-  User.findOneAndUpdate({ _id: req.user._id },
-    { username, followingUsers, favoriteSpaces, portfolio },
-    { new: true }).then(data => {
-      res.json(data)
-    }).catch(err => {
-      res.json(err)
-    });
-});
+// router.put('/settings', (req, res) => {
+//   const { username, followingUsers, favoriteSpaces, portfolio } = req.body
+//   User.findOneAndUpdate({ _id: req.user._id },
+//     { username, followingUsers, favoriteSpaces, portfolio },
+//     { new: true }).then(data => {
+//       res.json(data)
+//     }).catch(err => {
+//       res.json(err)
+//     });
+// });
 
 router.get('/porfolio', (req, res) => {
   Space.find({ owner: req.user }).then(response => {
@@ -46,12 +46,12 @@ router.post('/:userName/new-space', (req, res) => {
 });
 
 // edit space
-router.get('/portfolio/:spaceName', (req, res) => {
-  Space.findOne({ title: req.params.spaceName }).then(data => {
-    res.json(data)
-  }).catch(err => {
-    res.json(err)
-  });
+router.get('/:userName/:spaceName', (req, res) => {
+  User.findOne({ username: req.params.userName }).then(user => {
+    Space.find({ title: req.params.spaceName }).then(data => {
+      res.json(data);
+    });
+  }).catch(err => console.log(err))
 });
 
 router.put('/portfolio/:spaceName/edit', (req, res) => {
