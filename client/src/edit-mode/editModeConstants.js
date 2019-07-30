@@ -31,7 +31,7 @@ class Greek {
             let id = uuidv1()
             return {
                 note: x,
-                position: [parseInt(Math.random() * 800), parseInt(Math.random() * 800)],
+                position: [parseInt(Math.random() * window.innerWidth), parseInt(Math.random() * (window.innerHeight - 300) + 300)],
                 id: id,
                 start: false,
                 amp: 0.,
