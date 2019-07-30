@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 export default class Navbar extends Component {
-  // state = {
-  //   user: this.props.user
-  // }
+  state = {
+    user: this.props.user
+  };
   // handleLogout = props => {
   //   logout().then(() => {
   //     this.props.setUser(null);

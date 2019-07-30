@@ -6,9 +6,14 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Protected from "./components/Protected";
 import Profile from "./components/Profile";
+<<<<<<< HEAD
 import EditMap from "./edit-mode/EditMap";
 import BackGround from "./exp-mode/components/Background";
 import { NONAME } from "dns";
+=======
+import EditMap from "./edit-mode/EditMap"
+import SpaceMap from "./edit-mode/SpaceMap"
+>>>>>>> af28da21f663f98cc0741e68fd8919af92814413
 
 class App extends React.Component {
   state = {
@@ -52,8 +57,11 @@ class App extends React.Component {
             redirectPath="/login"
             setUser={this.setUser}
             user={this.state.user}
-            component={EditMap}
-          />
+            component={EditMap} />
+
+          <Route exact path='/user/:userName/:spaceName' component={SpaceMap} />
+
+
         </Switch>
       </div>
     );
