@@ -20,10 +20,15 @@ export default class Profile extends Component {
         //     })
         // })
     }
+    updateState = id => {
+        this.setState({
+            portfolio: this.state.portfolio.filter(x => x._id !== id)
+        })
+    }
     render() {
 
         const portfolio = this.state.portfolio.map(x => {
-            return <SpaceRow key={x._id} space={x} username={this.state.user.username} />
+            return <SpaceRow key={x._id} space={x} username={this.state.user.username} updateState={this.updateState} />
         })
 
         // const otherSpaces = this.state.otherSpaces.map(x => {

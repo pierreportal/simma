@@ -9,7 +9,8 @@ export default class EditMap extends Component {
   state = {
     space: null,
     showInputTitle: false,
-    spaceName: ''
+    spaceName: '',
+
   }
 
   handleDelete = id => {
@@ -83,6 +84,7 @@ export default class EditMap extends Component {
 
   render() {
 
+
     const nodes = this.state.space && this.state.space.map(n => {
       let nodeStyle = {
         width: 6,
@@ -93,6 +95,7 @@ export default class EditMap extends Component {
         left: 0,
         top: 0,
       }
+
       const position = { x: n.position[0], y: n.position[1] }
       return <div key={n.id}>
         <Draggable defaultPosition={position} onDrag={(e) => this.move(e, n.id)}>
@@ -114,6 +117,7 @@ export default class EditMap extends Component {
         <button onClick={this.save}>Save</button>
         {this.state.showInputTitle && <><input name="spaceName" onChange={this.nameSpace} type="text" placeholder="Name your space" /> <button onClick={this.saveSpace}>Done</button></>}
         {nodes}
+
       </div>
     )
   }

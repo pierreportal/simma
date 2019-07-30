@@ -3,15 +3,20 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 export default class SpaceRow extends Component {
-  handledelete = () => {
-    axios.get('/user/:userName/:spaceName/delete').then(() => console.log('done')).catch(err => console.log(err))
+
+  handledelete = (id) => {
+    // console.log(id)
+    axios.post('/user/:userName/:spaceName/delete', { id }).then(() => console.log('done')).catch(err => console.log(err))
+    this.props.updateState(id)
   }
   render() {
+
+    // console.log(this.props)
 
     return (
       <div>
         <Link to={`/user/${this.props.username}/${this.props.space.title}`}><h4>{this.props.space.title}</h4></Link>
-        <button onClick={this.handledelete}>delete</button>
+        <button onClick={() => this.handledelete(this.props.space._id)}>delete</button>
       </div>
     )
   }

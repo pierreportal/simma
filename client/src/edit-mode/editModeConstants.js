@@ -44,9 +44,44 @@ class Greek {
     }
 }
 
-// const mode = new Greek();
-// const scale1 = mode.scale('D', 1, 'lydian');
-// console.log(scale1)
+const KeyboardController = (keys, repeat) => {
+    var timers = {};
+    document.onkeydown = function (event) {
+        var key = (event || window.event).keyCode;
+        if (!(key in keys))
+            return true;
+        if (!(key in timers)) {
+            timers[key] = null;
+            keys[key]();
+            if (repeat !== 0)
+                timers[key] = setInterval(keys[key], repeat);
+        }
+        return false;
+    };
+
+    document.onkeyup = function (event) {
+        var key = (event || window.event).keyCode;
+        if (key in timers) {
+            if (timers[key] !== null)
+                clearInterval(timers[key]);
+            delete timers[key];
+        }
+    };
+    // window.onblur = function () {
+    //     for (key in timers)
+    //         if (timers[key] !== null)
+    //             clearInterval(timers[key]);
+    //     timers = {};
+    // };
+};
+let up = 0
+
+// KeyboardController({
+//     37: function () { console.log('left'); },
+//     38: function () { up++; console.log(up); },
+//     39: function () { console.log('right'); },
+//     40: function () { console.log('down'); }
+// }, 100);
 
 
-module.exports = { modes, notes, accidentals, octaves, Greek, flavors }
+module.exports = { modes, notes, accidentals, octaves, Greek, flavors, KeyboardController }

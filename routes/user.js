@@ -47,8 +47,9 @@ router.get('/:userName/:spaceName', (req, res) => {
 });
 
 // delete spacee
-router.delete('/:userName/:spaceName/delete', (req, res) => {
-  Space.findOneAndDelete({ owner: req.user._id, title: req.params.spaceName }).then(() => {
+router.post('/:userName/:spaceName/delete', (req, res) => {
+  ///user/:userName/:spaceName/delete
+  Space.findOneAndDelete({ _id: req.body.id }).then(() => {
     res.json({ message: 'Delete success.' })
   }).catch(err => {
     res.json(err)

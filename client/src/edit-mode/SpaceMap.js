@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-// import { Link } from 'react-router-dom'
+
+
+
+
 
 export default class SpaceMap extends Component {
   state = {
     username: '',
     title: '',
     nodes: [],
-    // otherSpaces: []
+    // voyagerPosition: [window.innerWidth / 2 - 5, window.innerHeight / 2 - 5]
   }
 
   distance = e => {
@@ -18,7 +21,6 @@ export default class SpaceMap extends Component {
         if (zone) {
           n.start = true;
           n.amp = ((150 - dist) / 150).toFixed(1)
-          // console.log(n.amp, n.note, n.flavor)
         } else {
           n.start = false;
           n.amp = 0
@@ -42,19 +44,30 @@ export default class SpaceMap extends Component {
   }
 
   render() {
+    // let voyagerStyle = {
+    //   width: 10,
+    //   height: 10,
+    //   backgroundColor: 'lightcoral',
+    //   borderRadius: '50%',
+    //   position: 'absolute',
+    //   left: this.state.voyagerPosition[0],
+    //   top: this.state.voyagerPosition[1],
+    // }
     const nodes = this.state.nodes.map(n => {
       return <div key={n.id} style={{ position: 'absolute', left: n.position[0], top: n.position[1] }}>{n.amp}</div>
     })
-    // const otherSpaces = this.state.otherSpaces.map(x => {
-    //   return <li><Link to={`/user/${x.ownerName}/${x.title}`}>{x.title}</Link></li>
-    // })
-    // console.log(this.state)
+
     return (
       <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseMove={this.distance} >
         <h4>{this.state.title} by {this.state.username}</h4>
         {nodes}
-        {/* {otherSpaces} */}
+        {/* <div style={voyagerStyle}></div> */}
       </div>
     )
   }
 }
+
+
+
+
+
