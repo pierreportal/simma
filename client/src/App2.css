@@ -1,0 +1,19 @@
+body {
+  width: 98.5vw;
+  height: 98vh;
+  display: flex;
+  word-break: break-all;
+  border: 10px solid black;
+  box-shadow: 0 0 0 2000px black;
+  border-radius: 35px;
+  overflow: hidden;
+  margin: 0px;
+  /* cursor: none; */
+  background-image: linear-gradient(
+    to right,
+    rgb(252, 0, 197),
+    rgb(0, 68, 255)
+  );
+
+  /* background-image: url("https://cdm.link/files/2012/01/teenage-1.jpg"); */
+}

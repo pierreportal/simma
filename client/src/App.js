@@ -10,6 +10,7 @@ import EditMap from "./edit-mode/EditMap";
 import BackGround from "./exp-mode/components/Background";
 import { NONAME } from "dns";
 import SpaceMap from "./edit-mode/SpaceMap";
+import Background from "./exp-mode/components/Background";
 
 class App extends React.Component {
   state = {

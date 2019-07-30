@@ -82,26 +82,6 @@
   z-index: 5;
 }
 
-body {
-  width: 98.5vw;
-  height: 98vh;
-  display: flex;
-  word-break: break-all;
-  border: 10px solid black;
-  box-shadow: 0 0 0 2000px black;
-  border-radius: 35px;
-  overflow: hidden;
-  margin: 0px;
-  /* cursor: none; */
-  background-image: linear-gradient(
-    to right,
-    rgb(252, 0, 197),
-    rgb(0, 68, 255)
-  );
-
-  /* background-image: url("https://cdm.link/files/2012/01/teenage-1.jpg"); */
-}
-
 #stars {
   word-break: break-all;
   text-align: left;
@@ -238,4 +218,37 @@ body {
 
 .large {
   font-size: 50px;
+}
+.navbar {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  /* background-color: white; */
+  align-items: center;
+  justify-content: space-between;
+  /* width: 100vw; */
+}
+.head-menu ul {
+  list-style: none;
+  padding: 0;
+}
+.head-menu li {
+  display: inline;
+  padding: 5px;
+  margin: 5px;
+  /* background-color: lightblue; */
+  border-radius: 5px;
+  font-weight: bold;
+}
+.head-menu a {
+  text-decoration: none;
+  color: black;
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  margin: auto;
+  height: 200px;
+  justify-content: space-between;
 }
