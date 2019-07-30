@@ -10,7 +10,6 @@ export default class EditMap extends Component {
     space: null,
     showInputTitle: false,
     spaceName: '',
-
   }
 
   handleDelete = id => {
@@ -69,6 +68,7 @@ export default class EditMap extends Component {
       space: this.state.space.map(n => {
         let dist = Math.sqrt(Math.pow((n.position[0] - e.clientX), 2) + Math.pow((n.position[1] - e.clientY), 2))
         let zone = dist < 150
+
         if (zone) {
           n.start = true;
           n.amp = ((150 - dist) / 150).toFixed(1)
@@ -89,21 +89,23 @@ export default class EditMap extends Component {
       let nodeStyle = {
         width: 6,
         height: 6,
-        backgroundColor: 'red',
+        backgroundColor: 'lightcoral',
         borderRadius: '50%',
         position: 'absolute',
         left: 0,
         top: 0,
       }
 
+
       const position = { x: n.position[0], y: n.position[1] }
       return <div key={n.id}>
+
         <Draggable defaultPosition={position} onDrag={(e) => this.move(e, n.id)}>
 
           <div style={nodeStyle}>
-            <button style={{ border: 'none', background: 'none' }} onClick={() => this.handleDelete(n.id)} >x</button>
+            <button style={{ border: 'none', background: 'none', margin: '6px' }} onClick={() => this.handleDelete(n.id)} >x</button>
             <p>{String(n.amp)}</p>
-            <p>{String(n.start)}</p>
+            {/* <p>{String(n.start)}</p> */}
           </div>
 
         </Draggable>
@@ -114,7 +116,7 @@ export default class EditMap extends Component {
       <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseMove={this.distance} >
         {/* <h1>MAP</h1> */}
         <GenerateScaleBtn generateScale={this.generateScale} />
-        <button onClick={this.save}>Save</button>
+        {this.state.space && <button onClick={this.save}>Save</button>}
         {this.state.showInputTitle && <><input name="spaceName" onChange={this.nameSpace} type="text" placeholder="Name your space" /> <button onClick={this.saveSpace}>Done</button></>}
         {nodes}
 

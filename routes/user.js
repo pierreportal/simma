@@ -7,6 +7,7 @@ const Space = require('../models/Space.js')
 router.get('/:userName', (req, res) => {
   // console.log(req.params.userName)
   User.findOne({ username: req.params.userName }).then(user => {
+    console.log(user)
     Space.find({ owner: user._id }).then(data => {
       res.json(data);
     });
@@ -56,6 +57,21 @@ router.post('/:userName/:spaceName/delete', (req, res) => {
   });
 });
 
+router.post('/:userName/like-space', (req, res) => {
+  Space.findOne({ _id: req.body.spaceId }).then(() => {
+    User.findOneAndUpdate({ username: req.body.user }, { $push: { favoriteSpaces: req.body.spaceId } }).then(() => {
+      res.json({ message: "Added to favorites" })
+    })
+  }).catch(err => res.json(err))
+})
+
+router.get('/getall', (req, res) => {
+  console.log('request received')
+  Space.find().then(data => {
+    console.log(data)
+    res.json(data)
+  }).catch(err => res.json(err))
+});
 
 module.exports = router
 

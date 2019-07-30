@@ -34,7 +34,7 @@ export default class GenerateScaleBtn extends Component {
     render() {
         return (
             <div>
-                {<button onClick={this.generateScale}>{this.state.showScalePrompt ? 'cancel' : 'new space'}</button>}
+                {<button onClick={this.generateScale}>{this.state.showScalePrompt ? 'cancel' : 'build scale'}</button>}
 
                 {this.state.showScalePrompt && <form onSubmit={this.handleSubmit}>
                     <select onChange={this.handleChange} name='inputNote' value={this.state.inputNote}>

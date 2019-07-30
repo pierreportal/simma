@@ -12,7 +12,8 @@ class Greek {
     constructor() {
         this.intervals = [0, 2, 4, 5, 7, 9, 11];
         this.modes = ['ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian', 'eolian', 'locrian'];
-        this.notes = ['G#/Ab', 'An', 'A#/Bb', 'Bn/Cb', 'B#/Cn', 'C#/Db', 'Dn', 'D#/Eb', 'En/Fb', 'E#/Fn', 'F#/Gb', 'Gn'];
+        // this.notes = ['G#/Ab', 'An', 'A#/Bb', 'Bn/Cb', 'B#/Cn', 'C#/Db', 'Dn', 'D#/Eb', 'En/Fb', 'E#/Fn', 'F#/Gb', 'Gn'];
+        this.notes = ['G#/Ab', 'An', 'A#/Bb', 'Bn/Cb', 'Cn', 'C#/Db', 'Dn', 'D#/Eb', 'En/Fb', 'Fn', 'F#/Gb', 'Gn'];
         this.freq = [415.30 / 3, 440.00 / 3, 466.16 / 3, 493.88 / 3, 523.25 / 3, 554.37 / 3, 587.33 / 3, 622.25 / 3, 659.25 / 3, 698.46 / 3, 739.99 / 3, 783.99 / 3];
     }
     scale(rootNote, accidental, ove, mode, flavor) {
@@ -30,7 +31,8 @@ class Greek {
         const scales = newScale.map(x => {
             let id = uuidv1()
             return {
-                note: x,
+                note: (x.includes('#') ? x.split('/')[0] : x.includes('n') ? x.split('n')[0] : x).concat(String(ove)),
+                //let arr3 = arr.map(x => {return x.includes('#') ? x.split('/')[0]: x.includes('n') ? x.split('n')[0] : x})
                 position: [parseInt(Math.random() * window.innerWidth), parseInt(Math.random() * (window.innerHeight - 300) + 300)],
                 id: id,
                 start: false,
@@ -74,7 +76,7 @@ const KeyboardController = (keys, repeat) => {
     //     timers = {};
     // };
 };
-let up = 0
+
 
 // KeyboardController({
 //     37: function () { console.log('left'); },

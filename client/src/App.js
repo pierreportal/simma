@@ -8,6 +8,7 @@ import Protected from "./components/Protected";
 import Profile from "./components/Profile";
 import EditMap from "./edit-mode/EditMap"
 import SpaceMap from "./edit-mode/SpaceMap"
+import Landing from './components/Landing'
 
 class App extends React.Component {
   state = {
@@ -25,6 +26,9 @@ class App extends React.Component {
 
         <Navbar user={this.state.user} setUser={this.setUser} />
         <Switch>
+
+          <Route exact path='/' component={Landing} />
+
           <Route path='/login' render={(props) => <Login user={this.state.user} setUser={this.setUser} {...props} />} />
 
           <Route path='/signup' component={Signup} />
@@ -49,7 +53,7 @@ class App extends React.Component {
             user={this.state.user}
             component={EditMap} />
 
-          <Route exact path='/user/:userName/:spaceName' component={SpaceMap} />
+          <Route exact path='/user/:userName/:spaceName' component={SpaceMap} user={this.state.user} />
 
 
         </Switch>

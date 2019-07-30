@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+// import LIstOfSpaces from './LIstOfSpaces';
 
 
 
@@ -7,10 +8,12 @@ import axios from 'axios'
 
 export default class SpaceMap extends Component {
   state = {
+    currentUser: '',
     username: '',
     title: '',
     nodes: [],
-    // voyagerPosition: [window.innerWidth / 2 - 5, window.innerHeight / 2 - 5]
+    ownerName: '',
+    spaceId: ''
   }
 
   distance = e => {
@@ -29,30 +32,32 @@ export default class SpaceMap extends Component {
       })
     })
   }
+
+  handleBookmark = () => {
+    console.log(this.state.spaceId)
+    axios.post(`/user/${this.state.username}/like-space`, this.state.spaceId, this.props.user).then(() => {
+      console.log(`${this.state.title} has been saved iy your bookmarks :)`)
+    }).catch(err => console.log(err))
+  }
+
+
   componentDidMount = () => {
     const { userName, spaceName } = this.props.match.params
     this.setState({ username: userName })
 
     axios.get(`/user/${userName}/${spaceName}`).then(response => {
-      console.log(response.data)
+      // console.log(response.data)
       this.setState({
-        // otherSpaces: response.data,
         title: response.data[0].title,
-        nodes: this.state.nodes.concat(response.data[0].nodes)
+        nodes: this.state.nodes.concat(response.data[0].nodes),
+        ownerName: response.data[0].ownerName,
+        spaceId: response.data[0]._id
       })
     }).catch(err => console.log(err))
   }
 
   render() {
-    // let voyagerStyle = {
-    //   width: 10,
-    //   height: 10,
-    //   backgroundColor: 'lightcoral',
-    //   borderRadius: '50%',
-    //   position: 'absolute',
-    //   left: this.state.voyagerPosition[0],
-    //   top: this.state.voyagerPosition[1],
-    // }
+    // console.log(this.state)
     const nodes = this.state.nodes.map(n => {
       return <div key={n.id} style={{ position: 'absolute', left: n.position[0], top: n.position[1] }}>{n.amp}</div>
     })
@@ -60,14 +65,14 @@ export default class SpaceMap extends Component {
     return (
       <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseMove={this.distance} >
         <h4>{this.state.title} by {this.state.username}</h4>
+        {/* <LIstOfSpaces /> */}
+
+        {this.state.ownerName !== this.state.username && <button onClick={this.handleBookmark}>Like</button>}
+
         {nodes}
         {/* <div style={voyagerStyle}></div> */}
       </div>
     )
   }
 }
-
-
-
-
 
