@@ -12,7 +12,7 @@ export default class Navbar extends Component {
   // };
   render() {
     return (
-      <div>
+      <div className="navbar">
         <Link to="/login">Log in</Link>
         <Link to="/signup">Sign up</Link>
         {this.props.user && (
