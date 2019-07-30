@@ -1,13 +1,14 @@
-import React from 'react';
-import './App.css';
-import Navbar from './components/Navbar'
-import { Switch, Route } from 'react-router-dom';
-import Login from './components/Login'
-import Signup from './components/Signup'
+import React from "react";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import { Switch, Route } from "react-router-dom";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 import Protected from "./components/Protected";
 import Profile from "./components/Profile";
-import EditMap from "./edit-mode/EditMap"
-import SpaceMap from "./edit-mode/SpaceMap"
+import EditMap from "./edit-mode/EditMap";
+import SpaceMap from "./edit-mode/SpaceMap";
+import Border from "./exp-mode/components/Border";
 
 class App extends React.Component {
   state = {
@@ -21,37 +22,44 @@ class App extends React.Component {
   };
   render() {
     return (
-      <div className="App" >
-
+      <div className="App">
+        <div className="border" />
         <Navbar user={this.state.user} setUser={this.setUser} />
         <Switch>
-          <Route path='/login' render={(props) => <Login user={this.state.user} setUser={this.setUser} {...props} />} />
+          <Route
+            path="/login"
+            render={props => (
+              <Login user={this.state.user} setUser={this.setUser} {...props} />
+            )}
+          />
 
-          <Route path='/signup' component={Signup} />
+          <Route path="/signup" component={Signup} />
 
-          <Route path='/logout' component={Login} />
+          <Route path="/logout" component={Login} />
 
           {/*
             ACCESS SPACE AND DISPLAY, DISTANCE FUNCTION NOT WORKING ON ROBERT'S COMPUTER
             */}
 
-
-
-
-
-          <Protected exact path="/user/:userName" redirectPath="/login"
+          <Protected
+            exact
+            path="/user/:userName"
+            redirectPath="/login"
             setUser={this.setUser}
             user={this.state.user}
-            component={Profile} />
+            component={Profile}
+          />
 
-          <Protected exact path="/user/:userName/new-space" redirectPath="/login"
+          <Protected
+            exact
+            path="/user/:userName/new-space"
+            redirectPath="/login"
             setUser={this.setUser}
             user={this.state.user}
-            component={EditMap} />
+            component={EditMap}
+          />
 
-          <Route exact path='/user/:userName/:spaceName' component={SpaceMap} />
-
-
+          <Route exact path="/user/:userName/:spaceName" component={SpaceMap} />
         </Switch>
       </div>
     );
