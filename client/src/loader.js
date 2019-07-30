@@ -1,0 +1,1 @@
+import "<pathToYourLoader>/loader.js";

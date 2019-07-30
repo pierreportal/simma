@@ -7,7 +7,7 @@ import Signup from "./components/Signup";
 import Protected from "./components/Protected";
 import Profile from "./components/Profile";
 import EditMap from "./edit-mode/EditMap";
-import BackGround from "./components/Background";
+import BackGround from "./exp-mode/components/Background";
 import { NONAME } from "dns";
 
 class App extends React.Component {
@@ -24,18 +24,7 @@ class App extends React.Component {
     return (
       <div className="App">
         {/* <h1>Simma</h1> */}
-        <Navbar
-          style={{
-            backgroundColor: "red",
-            position: "fixed",
-            top: "300px",
-            left: "100px",
-            zIndex: "50",
-            height: "100px",
-            display: "none"
-          }}
-          user={this.state.user}
-        />
+        <Navbar user={this.state.user} />
         <BackGround />
 
         <Switch>

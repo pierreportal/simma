@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import panAndZoomHoc from "react-pan-and-zoom-hoc";
 import Arrows from "./Arrows";
-import List from "./List";
+import List from "../../components/List";
 import Blackmask from "./Blackmask";
 
 const InteractiveDiv = panAndZoomHoc("div");
