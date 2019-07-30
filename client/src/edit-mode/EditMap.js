@@ -3,13 +3,18 @@ import GenerateScaleBtn from './GenerateScaleBtn';
 import { Greek } from './editModeConstants'
 import Draggable from 'react-draggable';
 import axios from 'axios';
-// import Node from '../components/Node'
+
+// import Vanilla from '../sounds/Vanilla'
+// import Mint from '../sounds/Mint'
+// import Grappe from '../sounds/Grappe'
+
 
 export default class EditMap extends Component {
   state = {
     space: null,
     showInputTitle: false,
     spaceName: '',
+    soundComponents: []
   }
 
   handleDelete = id => {
@@ -63,24 +68,35 @@ export default class EditMap extends Component {
   }
 
   distance = e => {
-    // console.log(e.clientX, e.clientY)
     this.state.space && this.setState({
       space: this.state.space.map(n => {
         let dist = Math.sqrt(Math.pow((n.position[0] - e.clientX), 2) + Math.pow((n.position[1] - e.clientY), 2))
         let zone = dist < 150
-
         if (zone) {
           n.start = true;
           n.amp = ((150 - dist) / 150).toFixed(1)
-          // console.log(n)
+          // this.soundFunction(n.note, n.flavor, n.amp)
         } else {
           n.start = false;
           n.amp = 0
+          // this.setState({ soundComponents: [] })
         }
         return n
       })
     })
   }
+  // soundFunction = (freq, flavor, amp) => {
+  //   const flavors = {
+  //     'vanilla': <Vanilla note={freq} amp={amp} />,
+  //     'grappe': <Grappe note={freq} amp={amp} />,
+  //     'mint': <Mint note={freq} amp={amp} />,
+  //   }
+  //   console.log(flavors[flavor].props)
+  //   //return flavors[flavor]
+  //   this.setState({
+  //     soundComponents: [...new Set(this.state.soundComponents.concat(flavors[flavor]))]
+  //   })
+  // }
 
   render() {
 
@@ -119,6 +135,7 @@ export default class EditMap extends Component {
         {this.state.space && <button onClick={this.save}>Save</button>}
         {this.state.showInputTitle && <><input name="spaceName" onChange={this.nameSpace} type="text" placeholder="Name your space" /> <button onClick={this.saveSpace}>Done</button></>}
         {nodes}
+        {this.state.soundComponents && this.state.soundComponents}
 
       </div>
     )

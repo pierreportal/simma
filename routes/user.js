@@ -58,6 +58,7 @@ router.post('/:userName/:spaceName/delete', (req, res) => {
 });
 
 router.post('/:userName/like-space', (req, res) => {
+  console.log(req.user.id)
   Space.findOne({ _id: req.body.spaceId }).then(() => {
     User.findOneAndUpdate({ username: req.body.user }, { $push: { favoriteSpaces: req.body.spaceId } }).then(() => {
       res.json({ message: "Added to favorites" })
