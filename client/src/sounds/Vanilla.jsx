@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import Tone from "tone";
-import random from "./Random";
-import SequenceArray from "./SequenceArray";
-import Coordinates from "../Components/Coordinates";
 
 export default class Vanilla extends Component {
   constructor(props) {
@@ -15,6 +12,13 @@ export default class Vanilla extends Component {
     let globalChannel = new Tone.Channel({
       volume: 0
     });
+
+    let space = {
+      amp: 0,
+      flavor: "",
+      note: "",
+      start: true
+    };
 
     //set up effect blocks
 
@@ -190,7 +194,7 @@ export default class Vanilla extends Component {
         sustain: 0.01,
         release: 0.9
       },
-      volume: -3,
+      volume: 0,
       frequency: 0,
       portamento: 0
     });
@@ -212,10 +216,10 @@ export default class Vanilla extends Component {
       feedBackDelay: feedBackDelay,
       freeVerb: freeVerb,
       tempo: tempo,
+      space: space,
 
-      //declare pattern
       pattern: new Tone.Pattern(function(time, note) {
-        synth.triggerAttackRelease(note, "5t");
+        synth.triggerAttackRelease("C3", "5t");
         envelope.triggerAttackRelease("9t");
       }, [])
     };
@@ -244,61 +248,21 @@ export default class Vanilla extends Component {
     phaser.connect(globalChannel);
 
     //global channel strip into master output
+    let triggerSynth = () => {
+      if (this.state.space.start) {
+        this.synth.triggerAttack(this.state.space.note, "1n");
+      }
+    };
+    synth.triggerAttack(this.state.space.note, "1n");
     globalChannel.connect(Tone.Master);
   }
 
-  //is this duplicate code?
-  // changeVolume = () => {
-  //   let interval = setInterval(() => {
-  //     const synth = this.state.synth;
-  //     synth.set("volume", random());
-  //     this.setState({ synth: synth });
-  //   }, 100);
-  //   this.setState({ interval });
-  // };
-
   //mount the components
   componentDidMount() {
-    //bring in coorindates
-    let coordinates = { ...Coordinates };
-    let nodeVolume = coordinates.volume;
-    let nodePan = coordinates.pan;
-    console.log(nodeVolume);
-    console.log(nodePan);
-    const globalChannel = this.state.globalChannel;
-    globalChannel.set("volume", nodeVolume);
-    globalChannel.set("pan", nodePan);
-    this.setState({ globalChannel: globalChannel });
-    //test that data stream can manipulate synth and volume
-    let randomNum = setInterval(() => {
-      const pitchShift = this.state.pitchShift;
-      pitchShift.set("pitch", random());
-      this.setState({ pitchShift: pitchShift });
-      const feedBackDelay = this.state.feedBackDelay;
-      feedBackDelay.set("delayTime", random() / -49);
-      this.setState({ feedBackDelay: feedBackDelay });
-      const freeVerb = this.state.freeVerb;
-      freeVerb.set("roomSize", random() / -24.6);
-      this.setState({ freeVerb: freeVerb });
-      const synth = this.state.synth;
-      synth.set("portamento", random());
-      synth.set("envelope", { release: random() / -38 });
-      this.setState({ synth: synth });
-      const tone = this.state.tempo;
-      Tone.Transport.bpm.set("bpm", random() * -7);
-      this.setState({ tone: tone });
-    }, 10000);
-    // const synth = this.state.synth;
-    // synth.set("volume", randomNum);
-
     //Initialize an audio context
     this.audioContext = new AudioContext();
+    console.log(this.props);
   }
-  sliderChange = e => {
-    const synth = this.state.synth;
-    const value = e.target.value;
-    synth.setState("frequency", value);
-  };
 
   //unmount audiocontext and settimeout
   componentWillUnmount() {
@@ -307,10 +271,45 @@ export default class Vanilla extends Component {
     // this.audioContext.close();
   }
 
-  //stop and start the sequence
+  componentDidUpdate(prevProps, prevState) {
+    const space = this.props.space || [];
+    let newSpace = [...space];
+    if (this.props.space[0].note !== this.state.space.note) {
+      this.setState({
+        space: {
+          ...this.state.space,
+          note: this.props.space[0].note
+        }
+      });
+    }
+    if (this.props.space[0].amp !== this.state.space.amp) {
+      this.setState({
+        space: {
+          ...this.state.space,
+          amp: this.props.space[0].amp
+        }
+      });
+    }
+    if (this.props.space[0].flavor !== this.state.space.flavor) {
+      this.setState({
+        space: {
+          ...this.state.space,
+          flavor: this.props.space[0].flavor
+        }
+      });
+    }
+    // if (this.props.space[0].start !== this.state.space.start) {
+    //   this.setState({
+    //     space: {
+    //       ...this.state.space,
+    //       start: this.props.space[0].start
+    //     }
+    //   });
+    // }
+  }
   sequence = () => {
     const pattern = { ...this.state.pattern };
-    pattern._pattern.values = SequenceArray();
+    pattern._pattern.values = ("C2", "B3");
     if (this.state.pattern.state === "stopped") {
       this.state.pattern.start(0);
       Tone.Transport.start();
@@ -321,17 +320,10 @@ export default class Vanilla extends Component {
   };
 
   render() {
+    console.log(this.state.space);
     return (
       <div>
-        <button className="Synth" onClick={this.sequence}>
-          <h1>Vanilla</h1>
-        </button>
-        <input
-          type="range"
-          min="0"
-          max="50"
-          onChange={e => this.sliderChange(e.target.value)}
-        />
+        <button onClick={this.sequence}>CLICK</button>
       </div>
     );
   }
