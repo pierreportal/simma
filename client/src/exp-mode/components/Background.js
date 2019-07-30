@@ -91,6 +91,8 @@ export default class Background extends Component {
         onPanMove={(x, y) => this.handlePanMove(x, y)}
         onZoomEnd={this.handleZoomEnd}
       >
+        <Arrows soundKnots={this.state.x} />
+
         <div className="buttonbox">
           <button className="addbutton" onClick={this.addNode.bind(this)}>
             add random node
@@ -99,7 +101,6 @@ export default class Background extends Component {
         {mapped}
 
         <Blackmask />
-        <Arrows soundKnots={this.state.x} />
         <List />
       </InteractiveDiv>
     );

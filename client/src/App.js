@@ -25,7 +25,7 @@ class App extends React.Component {
       <div className="App">
         {/* <h1>Simma</h1> */}
         <Navbar user={this.state.user} />
-        <BackGround />
+        {/* <BackGround /> */}
 
         <Switch>
           <Route
