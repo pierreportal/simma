@@ -17,7 +17,7 @@ export default class Vanilla extends Component {
       amp: 0,
       flavor: "",
       note: "",
-      start: true
+      start: false
     };
 
     //set up effect blocks
@@ -178,25 +178,24 @@ export default class Vanilla extends Component {
         harmonicity: 3
       },
       envelope: {
-        attack: 0.033,
-        decay: 0.6,
-        sustain: 0.0003,
-        release: 0.8,
-        attackCurve: "sine"
+        attack: 8,
+        decay: 15,
+        sustain: 1,
+        release: 0.002,
+        attackCurve: "exponential"
       },
       modulation: {
         volume: 2,
         type: "triangle"
       },
       modulationEnvelope: {
-        attack: 0,
+        attack: 1,
         decay: 0.04,
-        sustain: 0.01,
-        release: 0.9
+        sustain: 0.5,
+        release: 0.2
       },
       volume: 0,
-      frequency: 0,
-      portamento: 0
+      frequency: 0
     });
 
     //set the state
@@ -218,21 +217,27 @@ export default class Vanilla extends Component {
       tempo: tempo,
       space: space,
 
-      pattern: new Tone.Pattern(function(time, note) {
-        synth.triggerAttackRelease("C3", "5t");
-        envelope.triggerAttackRelease("9t");
-      }, [])
+      synthOn: new Tone.Event(function(time, note) {
+        console.log("it");
+        synth.triggerAttack("C3", "8n");
+        envelope.triggerAttack();
+      }),
+      synthOff: new Tone.Event(function(time, note) {
+        synth.triggerRelease("C3", "8n");
+        envelope.triggerRelease();
+        console.log("made");
+      })
     };
 
     //set up effect connections
     synth.connect(limiter);
     limiter.fan(
-      delay,
-      chorus,
-      pitchShift,
-      tremolo,
-      bitCrusher,
-      freeVerb,
+      // delay,
+      // chorus,
+      // pitchShift,
+      // tremolo,
+      // bitCrusher,
+      // freeVerb,
       // jcReverb,
       phaser
     );
@@ -248,12 +253,6 @@ export default class Vanilla extends Component {
     phaser.connect(globalChannel);
 
     //global channel strip into master output
-    let triggerSynth = () => {
-      if (this.state.space.start) {
-        this.synth.triggerAttack(this.state.space.note, "1n");
-      }
-    };
-    synth.triggerAttack(this.state.space.note, "1n");
     globalChannel.connect(Tone.Master);
   }
 
@@ -261,7 +260,6 @@ export default class Vanilla extends Component {
   componentDidMount() {
     //Initialize an audio context
     this.audioContext = new AudioContext();
-    console.log(this.props);
   }
 
   //unmount audiocontext and settimeout
@@ -298,33 +296,48 @@ export default class Vanilla extends Component {
         }
       });
     }
-    // if (this.props.space[0].start !== this.state.space.start) {
+    if (this.props.space[0].start !== this.state.space.start) {
+      this.setState({
+        space: {
+          ...this.state.space,
+          start: this.props.space[0].start
+        }
+      });
+    }
+    if (this.state.space.start) {
+      this.state.synthOn.start(0);
+      // this.state.synthOff.stop(0);
+      Tone.Transport.start();
+      Tone.Master.mute = false;
+    }
+    if (!this.state.space.start) {
+      this.state.synthOn.stop(0);
+      this.state.synthOff.start(0);
+      Tone.Master.mute = true;
+    }
+    // if (!this.state.space.start && this.state.synth.envelope.sustain > 0) {
     //   this.setState({
-    //     space: {
-    //       ...this.state.space,
-    //       start: this.props.space[0].start
+    //     synth: {
+    //       envelope: {
+    //         sustain: 0
+    //       }
     //     }
     //   });
     // }
   }
-  sequence = () => {
-    const pattern = { ...this.state.pattern };
-    pattern._pattern.values = ("C2", "B3");
-    if (this.state.pattern.state === "stopped") {
-      this.state.pattern.start(0);
-      Tone.Transport.start();
-    } else {
-      this.state.pattern.stop(0);
-      Tone.Transport.stop();
-    }
-  };
+  // handleClickOn = () => {
+  //   this.state.synthOn.start(0);
+  //   this.state.synthOff.stop(0);
+  //   Tone.Transport.start();
+  // };
+  // handleClickOff = () => {
+  //   this.state.synthOff.start(0);
+  //   this.state.synthOn.stop(0);
+  //   Tone.Transport.stop();
+  // };
 
   render() {
-    console.log(this.state.space);
-    return (
-      <div>
-        <button onClick={this.sequence}>CLICK</button>
-      </div>
-    );
+    console.log(this.state.space.start);
+    return <div />;
   }
 }
