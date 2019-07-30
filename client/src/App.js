@@ -22,8 +22,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App" >
-        <h1>Simma</h1>
-        <Navbar user={this.state.user} />
+
+        <Navbar user={this.state.user} setUser={this.setUser} />
         <Switch>
           <Route path='/login' render={(props) => <Login user={this.state.user} setUser={this.setUser} {...props} />} />
 
