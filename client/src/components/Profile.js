@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import SpaceRow from "../edit-mode/SpaceRow";
+import LikedSpaces from "../edit-mode/LikedSpaces";
 import Colorback from "../exp-mode/components/Colorback";
 
 export default class Profile extends Component {
@@ -18,11 +19,6 @@ export default class Profile extends Component {
         });
       })
       .catch(err => console.log(err));
-    // axios.get(`/user/getall/${this.props.user.username}`).then(response => {
-    //     this.setState({
-    //         otherSpaces: this.state.otherSpaces.concat(response.data)
-    //     })
-    // })
   };
   updateState = id => {
     this.setState({
@@ -41,10 +37,6 @@ export default class Profile extends Component {
       );
     });
 
-    // const otherSpaces = this.state.otherSpaces.map(x => {
-    //     return <h4>{x.title}</h4>
-    // })
-
     return (
       <div className="portfolio">
         <div className="list">
@@ -55,6 +47,7 @@ export default class Profile extends Component {
             {portfolio}
             {/* {otherSpaces} */}
             <Colorback />
+            <LikedSpaces user={this.state.user} />
           </div>
         </div>
       </div>

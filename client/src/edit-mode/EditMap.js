@@ -3,16 +3,15 @@ import GenerateScaleBtn from "./GenerateScaleBtn";
 import { Greek } from "./editModeConstants";
 import Draggable from "react-draggable";
 import axios from "axios";
-import Colorback from "./../exp-mode/components/Colorback";
-import "./../Editmap.css";
-
-// import Node from '../components/Node'
+import Colorback from "../exp-mode/components/Colorback";
 
 export default class EditMap extends Component {
   state = {
-    space: null,
+    space: this.props.nodes ? this.props.nodes : null,
     showInputTitle: false,
-    spaceName: ""
+    showInstruction: true,
+    spaceName: "",
+    soundComponents: []
   };
 
   handleDelete = id => {
@@ -43,14 +42,11 @@ export default class EditMap extends Component {
   move = (e, id) => {
     let dragX = e.clientX;
     let dragY = e.clientY;
-    // const movingNode = this.state.space.find(n => n.id === id)
-
     this.setState({
       space: this.state.space.map(n => {
         if (n.id === id) {
           n.position[0] = dragX;
           n.position[1] = dragY;
-          // console.log(n.position)
         }
         return n;
       })
@@ -58,12 +54,13 @@ export default class EditMap extends Component {
   };
   save = () => {
     this.setState({ showInputTitle: true });
-    // axios.post('user/portfolio')
   };
+
   nameSpace = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
+
   saveSpace = () => {
     console.log(this.state);
     axios
@@ -76,7 +73,6 @@ export default class EditMap extends Component {
   };
 
   distance = e => {
-    // console.log(e.clientX, e.clientY)
     this.state.space &&
       this.setState({
         space: this.state.space.map(n => {
@@ -88,7 +84,7 @@ export default class EditMap extends Component {
           if (zone) {
             n.start = true;
             n.amp = ((150 - dist) / 150).toFixed(1);
-            // console.log(n)
+            this.props.playSound(n.note, n.flavor, n.amp);
           } else {
             n.start = false;
             n.amp = 0;
@@ -98,6 +94,12 @@ export default class EditMap extends Component {
       });
   };
 
+  hideInstruction = () => {
+    this.setState({
+      showInstruction: false
+    });
+  };
+
   render() {
     const nodes =
       this.state.space &&
@@ -105,8 +107,8 @@ export default class EditMap extends Component {
         let nodeStyle = {
           width: 6,
           height: 6,
-          backgroundColor: "red",
-          borderRadius: "10%",
+          backgroundColor: "lightcoral",
+          borderRadius: "50%",
           position: "absolute",
           left: 0,
           top: 0
@@ -115,19 +117,22 @@ export default class EditMap extends Component {
         const position = { x: n.position[0], y: n.position[1] };
         return (
           <div key={n.id}>
+            ​
             <Draggable
               defaultPosition={position}
               onDrag={e => this.move(e, n.id)}
             >
-              <div className="rotate" style={nodeStyle}>
+              ​
+              <div style={nodeStyle}>
                 <button
-                  style={{ border: "none", background: "none" }}
+                  style={{ border: "none", background: "none", margin: "6px" }}
                   onClick={() => this.handleDelete(n.id)}
                 >
                   x
                 </button>
                 <p>{String(n.amp)}</p>
               </div>
+              ​
             </Draggable>
           </div>
         );
@@ -135,18 +140,22 @@ export default class EditMap extends Component {
 
     return (
       <div
-        className=" editmap"
+        className="editmap"
         style={{ width: "100vw", height: "100vh" }}
+        onMouseDown={this.hideInstruction}
         onMouseMove={this.distance}
       >
-        {/* <h1>MAP</h1> */}
+        {this.state.showInstruction && (
+          <h3 style={{ marginTop: "160px" }}>create your scale here</h3>
+        )}
         <GenerateScaleBtn generateScale={this.generateScale} />
-        <button className="cbutton4 saving" onClick={this.save}>
-          Save
-        </button>
+        {this.state.space && (
+          <button className="cbutton4 saving" onClick={this.save}>
+            Save
+          </button>
+        )}
         {this.state.showInputTitle && (
           <>
-            <div />
             <input
               className="inputf"
               name="spaceName"
@@ -161,6 +170,7 @@ export default class EditMap extends Component {
         )}
         {nodes}
         <Colorback />
+        {this.state.soundComponents && this.state.soundComponents}​
       </div>
     );
   }

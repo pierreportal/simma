@@ -12,6 +12,8 @@ import Border from "./exp-mode/components/Border";
 import Colorback from "../src/exp-mode/components/Colorback";
 import Blackmask from "../src/exp-mode/components/Blackmask";
 import Arrows from "../src/exp-mode/components/Arrows";
+import Landing from "./components/Landing";
+import Sounds from "./sounds/Sounds";
 
 class App extends React.Component {
   state = {
@@ -33,21 +35,15 @@ class App extends React.Component {
           setUser={this.setUser}
         />
         <Switch>
+          <Route exact path="/" component={Landing} />
           <Route
             path="/login"
             render={props => (
               <Login user={this.state.user} setUser={this.setUser} {...props} />
             )}
           />
-
           <Route path="/signup" component={Signup} />
-
           <Route path="/logout" component={Login} />
-
-          {/*
-            ACCESS SPACE AND DISPLAY, DISTANCE FUNCTION NOT WORKING ON ROBERT'S COMPUTER
-            */}
-
           <Protected
             exact
             path="/user/:userName"
@@ -56,17 +52,22 @@ class App extends React.Component {
             user={this.state.user}
             component={Profile}
           />
-
           <Protected
             exact
             path="/user/:userName/new-space"
             redirectPath="/login"
             setUser={this.setUser}
             user={this.state.user}
-            component={EditMap}
+            component={Sounds}
           />
-
-          <Route exact path="/user/:userName/:spaceName" component={SpaceMap} />
+          {/* component={RobertSounds}     which will render <EditMap/> */}
+          <Route
+            exact
+            path="/user/:userName/:spaceName"
+            render={props => <Sounds user={this.state.user} {...props} />}
+          />
+          {/* component={RobertSounds}     which will render <SpaceMap/> */}
+          {/* render={(props) => <Login user={this.state.user} setUser={this.setUser} {...props} />} /> */}
         </Switch>
         <Arrows />
         <Colorback />

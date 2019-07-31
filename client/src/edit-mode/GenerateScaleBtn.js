@@ -22,9 +22,11 @@ export default class GenerateScaleBtn extends Component {
     listOfFlavors: flavors
   };
   // METHODS
-  componentDidMount() {
+  generateScale = () => {
     this.setState({ showScalePrompt: !this.state.showScalePrompt });
+  };
 
+  componentDidMount() {
     var tempX = 0;
     var tempY = 0;
 
@@ -46,10 +48,10 @@ export default class GenerateScaleBtn extends Component {
       tempY = Math.floor(scale(tempY, 0, window.innerHeight, 0, 255));
       for (let i = 0; i < body.length; i++) {
         body[i].style.backgroundImage = ` linear-gradient(
-        to right,
-        rgba(${tempX}, 0, ${tempY}),
-        rgba(${tempY}, 0, 255)
-      )`;
+          to right,
+          rgba(${tempX}, 0, ${tempY}),
+          rgba(${tempY}, 0, 255)
+        )`;
       }
       console.log("X coordinate: " + tempX);
       console.log("Y coordinate: " + tempY);
@@ -66,9 +68,7 @@ export default class GenerateScaleBtn extends Component {
 
     document.addEventListener("mousemove", getMouseXY);
   }
-  generateScale = () => {
-    this.setState({ showScalePrompt: !this.state.showScalePrompt });
-  };
+
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
