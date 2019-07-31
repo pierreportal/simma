@@ -11,7 +11,7 @@ import axios from 'axios';
 
 export default class EditMap extends Component {
   state = {
-    space: null,
+    space: this.props.nodes ? this.props.nodes : null,
     showInputTitle: false,
     showInstruction: true,
     spaceName: '',

@@ -7,8 +7,9 @@ import Signup from './components/Signup'
 import Protected from "./components/Protected";
 import Profile from "./components/Profile";
 import EditMap from "./edit-mode/EditMap"
-import SpaceMap from "./edit-mode/SpaceMap"
+// import SpaceMap from "./edit-mode/SpaceMap"
 import Landing from './components/Landing'
+import Sounds from './sounds/Sounds';
 
 class App extends React.Component {
   state = {
@@ -47,7 +48,7 @@ class App extends React.Component {
             component={EditMap} />
           {/* component={RobertSounds}     which will render <EditMap/> */}
 
-          <Route exact path='/user/:userName/:spaceName' render={(props) => <SpaceMap user={this.state.user} {...props} />} />
+          <Route exact path='/user/:userName/:spaceName' render={(props) => <Sounds user={this.state.user} {...props} />} />
           {/* component={RobertSounds}     which will render <SpaceMap/> */}
           {/* render={(props) => <Login user={this.state.user} setUser={this.setUser} {...props} />} /> */}
 

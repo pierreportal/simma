@@ -1,5 +1,4 @@
 const express = require("express");
-// const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
 const Space = require('../models/Space')
@@ -18,23 +17,12 @@ router.get('/likedSpaces', (req, res) => {
 })
 
 router.get('/:userName', (req, res) => {
-  // console.log(req.params.userName)
   User.findOne({ username: req.params.userName }).then(user => {
-    // console.log(user)
     Space.find({ owner: user._id }).then(data => {
       res.json(data);
     });
   }).catch(err => console.log(err))
 });
-
-
-// router.get('/porfolio', (req, res) => {
-//   Space.find({ owner: req.user }).then(response => {
-//     res.json(response)
-//   }).catch(err => {
-//     res.json(err)
-//   });
-// });
 
 router.post('/:userName/new-space', (req, res) => {
   const { space, spaceName } = req.body
@@ -62,7 +50,6 @@ router.get('/:userName/:spaceName', (req, res) => {
 
 // delete spacee
 router.post('/:userName/:spaceName/delete', (req, res) => {
-  ///user/:userName/:spaceName/delete
   Space.findOneAndDelete({ _id: req.body.id }).then(() => {
     res.json({ message: 'Delete success.' })
   }).catch(err => {
@@ -71,8 +58,6 @@ router.post('/:userName/:spaceName/delete', (req, res) => {
 });
 
 router.post('/:userName/like-space', (req, res) => {
-  // console.log(req.user._id)
-
   User.findOneAndUpdate({ _id: req.user.id }, { $push: { favoriteSpaces: req.body.spaceId } }).then(() => {
     res.json({ message: "Added to favorites" })
 

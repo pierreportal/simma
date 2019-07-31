@@ -14,7 +14,7 @@ export default class SpaceMap extends Component {
     spaceId: '',
     mouseDown: false
   }
-
+  // ############################################### mouse down / up --> ALL GOOD
   mouseDown = () => {
     this.setState({
       mouseDown: true
@@ -27,6 +27,7 @@ export default class SpaceMap extends Component {
     })
   }
 
+  // ############################################### distance --> need to call Robert's code
   distance = e => {
     if (this.state.mouseDown) {
       this.state.nodes && this.setState({
@@ -36,7 +37,7 @@ export default class SpaceMap extends Component {
           if (zone) {
             n.start = true;
             n.amp = ((150 - dist) / 150).toFixed(1)
-            // this.props.robertsSound(note, amp, flavor)
+            this.props.playSound()
           } else {
             n.start = false;
             n.amp = 0
@@ -46,7 +47,7 @@ export default class SpaceMap extends Component {
       })
     }
   }
-
+  // ############################################### like Space --> ALL GOOD
   handleBookmark = () => {
     console.log(this.state.spaceId)
     console.log(this.props.user)
@@ -60,15 +61,13 @@ export default class SpaceMap extends Component {
     }).catch(err => console.log(err))
   }
 
-
-
-
-
-
-
+  // ############################################### Edit Space --> TO DO
   handleEditSpace = () => {
     console.log('Go in edit mode')
     // go to EditMap with this space in props
+  }
+  componentDidMount = () => {
+    this.load()
   }
 
   componentDidUpdate = (prevProps) => {
@@ -78,7 +77,7 @@ export default class SpaceMap extends Component {
   }
 
   load = () => {
-    console.log("mount")
+    // console.log("mount")
     const { userName, spaceName } = this.props.match.params
     this.setState({ username: userName })
 
@@ -93,26 +92,12 @@ export default class SpaceMap extends Component {
     }).catch(err => console.log(err))
   }
 
-  componentDidMount = () => {
-    this.load()
-  }
-
-
 
   render() {
     const nodes = this.state.nodes.map(n => {
       return <div key={n.id} style={{ position: 'absolute', left: n.position[0], top: n.position[1] }}>{(n.amp)}</div>
     })
 
-    // const likeBtn = () => {
-    //   if (this.state.ownerName !== this.props.user.username) {
-    //     if (!this.props.user.favoriteSpaces.includes(this.state.spaceId)) {
-    //       return <button onClick={this.handleBookmark}>Like</button>
-    //     } else {
-    //       return <button onClick={this.handleBookmark}>Unlike</button>
-    //     }
-    //   }
-    // }
     console.log(this.props.user)
     return (
       <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.distance} >
@@ -127,8 +112,6 @@ export default class SpaceMap extends Component {
             <button onClick={this.handleUnlike}>Unlike</button>
           : null
         }
-
-
 
         {this.state.ownerName === this.props.user.username && <Link to={`/user/${this.state.username}/edit-space/${this.state.spaceId}`}><button onClick={this.handleEditSpace}>Edit</button></Link>}
         {nodes}
