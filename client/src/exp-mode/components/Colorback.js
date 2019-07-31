@@ -5,7 +5,7 @@ export default class Colorback extends Component {
     var tempX = 0;
     var tempY = 0;
 
-    var body = document.getElementsByTagName("body");
+    var body = document.getElementsByClassName("App");
 
     function getMouseXY(e) {
       tempX = e.pageX;
@@ -24,8 +24,8 @@ export default class Colorback extends Component {
 
       body[0].style.backgroundImage = ` linear-gradient(
         to right,
-        rgb(${tempX}, 0, 197),
-        rgb(0, 68, ${tempY})
+        rgba(${tempX}, 0, ${tempY}),
+        rgba(${tempY}, 0, 0)
       )`;
       console.log("X coordinate: " + tempX);
       console.log("Y coordinate: " + tempY);

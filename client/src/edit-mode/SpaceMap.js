@@ -3,6 +3,7 @@ import axios from "axios";
 // import Background from "./../exp-mode/components/Background";
 import Blackmask from "./../exp-mode/components/Blackmask";
 import Colorback from "../exp-mode/components/Colorback";
+import Arrows from "../exp-mode/components/Arrows";
 
 export default class SpaceMap extends Component {
   state = {
@@ -86,7 +87,7 @@ export default class SpaceMap extends Component {
         {nodes}
         {/* <div style={voyagerStyle}></div> */}
         <Colorback />
-        {/* <Blackmask /> */}
+        <Blackmask />
       </div>
     );
   }

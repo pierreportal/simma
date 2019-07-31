@@ -2,7 +2,7 @@
   text-align: center;
   font-family: "pressura_light";
   color: #9031f3;
-  background-color: #ddd4ca;
+  background-color: black;
 }
 
 .App-logo {
@@ -75,6 +75,7 @@
 
 body {
   /* cursor: none; */
+  background-color: black;
 }
 
 .border {
@@ -85,11 +86,11 @@ body {
   justify-content: center;
   justify-items: center;
   word-break: break-all;
-  border-top: 1vh solid black;
-  border-bottom: 1vh solid black;
-  border-left: 0.75vw solid black;
-  border-right: 0.75vw solid black;
-  box-shadow: 0 0 0 2000px black;
+  border-top: 1vh solid white;
+  border-bottom: 1vh solid white;
+  border-left: 0.75vw solid white;
+  border-right: 0.75vw solid white;
+  box-shadow: 0 0 0 2000px white;
   border-radius: 35px;
   margin: 0px;
   overflow: scroll;

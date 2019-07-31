@@ -15,16 +15,16 @@ export default class SpaceRow extends Component {
     // console.log(this.props)
 
     return (
-      <div>
-        <Link to={`/user/${this.props.username}/${this.props.space.title}`}>
-          <h4>{this.props.space.title}</h4>
-        </Link>
+      <div className="spacerow">
         <button
           className="deletebutton"
           onClick={() => this.handledelete(this.props.space._id)}
         >
           X
         </button>
+        <Link to={`/user/${this.props.username}/${this.props.space.title}`}>
+          <h4>{this.props.space.title}</h4>
+        </Link>
       </div>
     );
   }

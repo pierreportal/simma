@@ -3,6 +3,9 @@ import GenerateScaleBtn from "./GenerateScaleBtn";
 import { Greek } from "./editModeConstants";
 import Draggable from "react-draggable";
 import axios from "axios";
+import Colorback from "./../exp-mode/components/Colorback";
+import "./../Editmap.css";
+
 // import Node from '../components/Node'
 
 export default class EditMap extends Component {
@@ -132,25 +135,33 @@ export default class EditMap extends Component {
 
     return (
       <div
-        className="map"
+        className=" editmap"
         style={{ width: "100vw", height: "100vh" }}
         onMouseMove={this.distance}
       >
         {/* <h1>MAP</h1> */}
         <GenerateScaleBtn generateScale={this.generateScale} />
-        <button onClick={this.save}>Save</button>
+        <button className="cbutton5" onClick={this.save}>
+          Save
+        </button>
         {this.state.showInputTitle && (
           <>
-            <input
-              name="spaceName"
-              onChange={this.nameSpace}
-              type="text"
-              placeholder="Name your space"
-            />{" "}
-            <button onClick={this.saveSpace}>Done</button>
+            <div className="save">
+              <input
+                className="inputf"
+                name="spaceName"
+                onChange={this.nameSpace}
+                type="text"
+                placeholder="Name your space"
+              />{" "}
+              <button className="cbutton5" onClick={this.saveSpace}>
+                Done
+              </button>
+            </div>
           </>
         )}
         {nodes}
+        <Colorback />
       </div>
     );
   }

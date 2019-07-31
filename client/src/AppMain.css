@@ -1,0 +1,439 @@
+/* * {
+  cursor: none;
+} */
+.App {
+  font-family: "pressura_light";
+  color: white;
+  /* cursor: none; */
+}
+a {
+  color: white;
+}
+
+body {
+  background-image: linear-gradient(red, yellow);
+}
+
+.login,
+.signup {
+  display: flex;
+  justify-items: center;
+  flex-direction: row;
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  font-family: "pressura_light";
+  font-size: 0.7rem;
+  overflow: hidden;
+}
+
+.logp {
+  font-size: 10px;
+  font-family: "pressura_light";
+  font-size: 0.7rem;
+}
+
+.landing {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  z-index: -10;
+  /* cursor: none; */
+}
+
+.portfolio {
+  /* background-color: violet; */
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  z-index: -10;
+}
+
+.editmap {
+  background-color: blue;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+
+  z-index: 0;
+}
+
+@font-face {
+  font-family: "Favorit Light";
+  src: url("./exp-mode/fonts/Favorit-Light.woff2") format("woff2"),
+    url("./exp-mode/fonts/Favorit-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Favorit";
+  src: url("./exp-mode/fonts/Favorit-Medium.woff2") format("woff2"),
+    url("./exp-mode/fonts/Favorit-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "pressura_light";
+  src: url("./exp-mode/fonts/gt-pressura-pro-mono-light-webfont.woff2")
+      format("woff2"),
+    url("./exp-mode/fonts/gt-pressura-pro-mono-light-webfont.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "pressura_reg";
+  src: url("./exp-mode/fonts/gt-pressura-pro-mono-regular-webfont.woff2")
+      format("woff2"),
+    url("./exp-mode/fonts/gt-pressura-pro-mono-regular-webfont.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.border {
+  position: fixed;
+  z-index: 100;
+  width: 98.5vw;
+  height: 98vh;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  word-break: break-all;
+  border-top: 1vh solid white;
+  border-bottom: 1vh solid white;
+  border-left: 0.75vw solid white;
+  border-right: 0.75vw solid white;
+  box-shadow: 0 0 0 2000px white;
+  border-radius: 35px;
+  margin: 0px;
+  overflow: scroll;
+  pointer-events: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.map {
+  background-color: blueviolet;
+  cursor: none;
+}
+
+.hole {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  width: 100px;
+  height: 100px;
+  -webkit-filter: blur(30px);
+  z-index: 0;
+  border-radius: 50%;
+  box-shadow: 20px 10px 20px 20000px rgba(3, 0, 12, 0.95);
+  -webkit-transition: all 0.1s ease;
+}
+
+.largehole {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  width: 500px;
+  height: 500px;
+  -webkit-filter: blur(30px);
+  z-index: 0;
+  border-radius: 50%;
+  box-shadow: 20px 10px 20px 20000px rgba(0, 0, 0, 0.95);
+  -webkit-transition: all 0.2s ease;
+}
+
+.list {
+  height: 60vh;
+  overflow-y: scroll;
+  list-style: none;
+  color: white;
+}
+
+.box {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+}
+
+.addbutton {
+  z-index: 40;
+  max-width: 50%;
+}
+
+.large {
+  font-size: 50px;
+}
+
+.head-menu ul {
+  list-style: none;
+  padding: 0;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  font-size: 15px;
+  padding-right: 20px;
+}
+.head-menu li {
+  padding: 5px;
+  margin: 5px;
+  /* background-color: lightblue; */
+  border-radius: 5px;
+  font-weight: bold;
+}
+.head-menu a {
+  text-decoration: none;
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: auto;
+
+  justify-items: center;
+
+  font-family: "Favorit";
+  font-size: 20px;
+}
+
+.authInput {
+  background-color: black;
+  border: 1px solid white;
+  height: 20px;
+  font-family: "pressura_light";
+  font-size: 0.5rem;
+  color: white;
+  text-align: center;
+  opacity: 1;
+  margin: 10px;
+}
+
+.authButton {
+  position: relative;
+  display: flex;
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+  width: 80px;
+}
+
+.navbar {
+  position: fixed;
+  width: 100vw;
+  z-index: 100;
+  font-size: 1.5rem;
+  background-color: ;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  color: white;
+}
+
+.select-css {
+  display: inline;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 1rem;
+  font-family: "pressura_reg";
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  line-height: 1.3;
+  padding: 0.6em 1.4em 0.5em 0.8em;
+  width: 100px;
+  height: 100px;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+
+  box-shadow: 0 10px 20px 1px rgba(0, 0, 0, 0.4);
+  /* border-radius: 50%; */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: blue;
+  opacity: 0.8;
+  background-repeat: repeat;
+  background-position: center;
+  background-size: 150%;
+
+  background-image: linear-gradient(
+    to right,
+    rgba(200, 0, 197),
+    rgba(0, 0, 200)
+  );
+}
+.select-css::-ms-expand {
+  display: none;
+}
+.select-css:hover {
+  border: none;
+}
+.select-css:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 0 3px -moz-mac-focusring;
+  color: white;
+  outline: none;
+}
+.select-css option {
+  font-weight: light;
+}
+.center {
+  display: flex;
+  justify-content: center;
+}
+.cbutton {
+  font-family: "pressura_light";
+  display: block;
+  width: 200px;
+  border-radius: 0em;
+  height: 20px;
+  position: relative;
+  background-color: blue;
+  color: white;
+}
+.cbutton2 {
+  font-family: "pressura_light";
+  display: block;
+  width: 200px;
+  border-radius: 0em;
+  height: 20px;
+  position: absolute;
+  background-color: blue;
+  color: white;
+  top: -150px;
+}
+.cbutton3 {
+  font-family: "pressura_light";
+  display: block;
+  width: 200px;
+  border-radius: 0em;
+  height: 20px;
+  position: relative;
+  background-color: blue;
+  color: white;
+  top: 60px;
+}
+.cbutton4 {
+  font-family: "pressura_light";
+  display: block;
+  width: 200px;
+  border-radius: 0em;
+  height: 20px;
+  position: relative;
+  background-color: blue;
+  color: white;
+  top: 60px;
+  left: 900px;
+}
+
+.cbutton5 {
+  font-family: "pressura_light";
+  display: block;
+  width: 200px;
+  border-radius: 0em;
+  height: 20px;
+  background-color: blue;
+  color: white;
+  left: 200px;
+  top: 400px;
+  position: relative;
+}
+
+.save {
+  display: block;
+  justify-content: center;
+}
+
+.newForm {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 70vw;
+  top: 250px;
+  z-index: 150;
+}
+
+.inputf {
+  background-color: blue;
+  height: 50px;
+  font-family: "Favorit";
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  opacity: 0.4;
+  border: none;
+  position: relative;
+}
+
+.list {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  justify-items: left;
+  font-size: 0.6rem;
+  position: absolute;
+  top: 320px;
+  font-family: "pressura_light";
+  position: relative;
+}
+
+.spacerow {
+  display: flex;
+  justify-content: left;
+  width: 10vw;
+}
+
+.deletebutton {
+  background-color: rgba(0, 0, 0, 0);
+  margin: 10px;
+  color: white;
+}
+.arrow {
+  display: inline-flex;
+  justify-content: center;
+  font-family: "pressura_reg";
+  width: 7vw;
+  padding: 20px;
+  font-size: 12px;
+  font-weight: 800;
+  color: white;
+  z-index: 20;
+  pointer-events: none;
+  position: fixed;
+
+  /* border: 1px solid blue; */
+  /* box-shadow: 5px 5px 50px blue; */
+}
+
+.arrow1 {
+  left: 0;
+  top: 0;
+  margin-top: 20px;
+}
+.arrow2 {
+  right: 0;
+  top: 0;
+  margin-top: 20px;
+}
+.arrow3 {
+  left: 0;
+  bottom: 0;
+  margin-bottom: 20px;
+}
+.arrow4 {
+  right: 0;
+  bottom: 0;
+  margin-bottom: 20px;
+}
