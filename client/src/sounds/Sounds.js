@@ -286,59 +286,67 @@ export default class Sounds extends Component {
     // clearInterval(this.state.interval);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // const space = this.props.space || [];
-    // let newSpace = [...space];
-    if (this.props.space[0].note !== this.state.space.note) {
-      this.setState({
-        space: {
-          ...this.state.space,
-          note: this.props.space[0].note
-        }
-      });
-    }
-    if (this.props.space[0].amp !== this.state.space.amp) {
-      this.setState({
-        space: {
-          ...this.state.space,
-          amp: this.props.space[0].amp
-        }
-      });
-    }
-    if (this.props.space[0].flavor !== this.state.space.flavor) {
-      this.setState({
-        space: {
-          ...this.state.space,
-          flavor: this.props.space[0].flavor
-        }
-      });
-    }
-    if (this.props.space[0].start !== this.state.space.start) {
-      this.setState({
-        space: {
-          ...this.state.space,
-          start: this.props.space[0].start
-        }
-      });
-    }
-    if (this.state.space.start) {
-      this.state.synthOn.start(0);
-      // this.state.synthOff.stop(0);
-      Tone.Transport.start();
-      Tone.Master.mute = false;
-    }
-    if (!this.state.space.start) {
-      this.state.synthOn.stop(0);
-      this.state.synthOff.start(0);
-      Tone.Master.mute = true;
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   // const space = this.props.space || [];
+  //   // let newSpace = [...space];
+  //   if (this.props.space[0].note !== this.state.space.note) {
+  //     this.setState({
+  //       space: {
+  //         ...this.state.space,
+  //         note: this.props.space[0].note
+  //       }
+  //     });
+  //   }
+  //   if (this.props.space[0].amp !== this.state.space.amp) {
+  //     this.setState({
+  //       space: {
+  //         ...this.state.space,
+  //         amp: this.props.space[0].amp
+  //       }
+  //     });
+  //   }
+  //   if (this.props.space[0].flavor !== this.state.space.flavor) {
+  //     this.setState({
+  //       space: {
+  //         ...this.state.space,
+  //         flavor: this.props.space[0].flavor
+  //       }
+  //     });
+  //   }
+  //   if (this.props.space[0].start !== this.state.space.start) {
+  //     this.setState({
+  //       space: {
+  //         ...this.state.space,
+  //         start: this.props.space[0].start
+  //       }
+  //     });
+  //   }
+  //   if (this.state.space.start) {
+  //     this.state.synthOn.start(0);
+  //     // this.state.synthOff.stop(0);
+  //     Tone.Transport.start();
+  //     Tone.Master.mute = false;
+  //   }
+  //   if (!this.state.space.start) {
+  //     this.state.synthOn.stop(0);
+  //     this.state.synthOff.start(0);
+  //     Tone.Master.mute = true;
+  //   }
+  // }
+
+
+
+
   // handleClick = () => {
   //   this.setState(flavors.vanilla);
   // };
-  playSound = () => {
-    this.setState(flavors.vanilla)
-    console.log(this.state)
+  playSound = (...args) => {
+
+    let note = args[0]
+    let flavor = args[1]
+    let amp = args[2]
+
+    console.log(note, amp, flavor)
   }
 
   render() {

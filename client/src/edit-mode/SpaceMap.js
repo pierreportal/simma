@@ -37,11 +37,13 @@ export default class SpaceMap extends Component {
           if (zone) {
             n.start = true;
             n.amp = ((150 - dist) / 150).toFixed(1)
-            this.props.playSound()
+            this.props.playSound(n.note, n.flavor, n.amp)
+
           } else {
             n.start = false;
             n.amp = 0
           }
+
           return n
         })
       })
@@ -49,8 +51,8 @@ export default class SpaceMap extends Component {
   }
   // ############################################### like Space --> ALL GOOD
   handleBookmark = () => {
-    console.log(this.state.spaceId)
-    console.log(this.props.user)
+    // console.log(this.state.spaceId)
+    // console.log(this.props.user)
     axios.post(`/user/${this.state.username}/like-space`, { spaceId: this.state.spaceId, user: this.props.user }).then(() => {
       console.log(`${this.state.title} has been saved iy your bookmarks :)`)
     }).catch(err => console.log(err))
@@ -82,7 +84,7 @@ export default class SpaceMap extends Component {
     this.setState({ username: userName })
 
     axios.get(`/user/${userName}/${spaceName}`).then(response => {
-      console.log(response)
+      // console.log(response)
       this.setState({
         title: response.data[0].title,
         nodes: response.data[0].nodes,
@@ -98,7 +100,7 @@ export default class SpaceMap extends Component {
       return <div key={n.id} style={{ position: 'absolute', left: n.position[0], top: n.position[1] }}>{(n.amp)}</div>
     })
 
-    console.log(this.props.user)
+    // console.log(this.props.user)
     return (
       <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.distance} >
         <ListOfSpaces />
