@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import SpaceRow from '../edit-mode/SpaceRow';
+import LikedSpaces from '../edit-mode/LikedSpaces';
 
 export default class Profile extends Component {
     state = {
         user: this.props.user,
         portfolio: [],
-        otherSpaces: []
+        otherSpaces: [],
+        // likedSpaces: []
     }
     componentDidMount = () => {
         axios.get(`/user/${this.props.user.username}`).then((response) => {
@@ -30,6 +32,12 @@ export default class Profile extends Component {
         const portfolio = this.state.portfolio.map(x => {
             return <SpaceRow key={x._id} space={x} username={this.state.user.username} updateState={this.updateState} />
         })
+        // const likedSpaces = this.state.user.favoriteSpaces.map(x => {
+        //     return <li>{x}</li>
+        // })
+
+
+        // console.log(this.state.user.favoriteSpaces)
 
         // const otherSpaces = this.state.otherSpaces.map(x => {
         //     return <h4>{x.title}</h4>
@@ -41,9 +49,11 @@ export default class Profile extends Component {
                 <h2>{this.state.user.username}</h2>
                 <div>
                     <h3>My spaces</h3>
-
                     {portfolio}
-                    {/* {otherSpaces} */}
+                    {/* <h3>Liked spaces</h3>
+                    {likedSpaces} */}
+                    <LikedSpaces user={this.state.user} />
+
 
                 </div>
 

@@ -10,10 +10,17 @@ router.get('/getall', (req, res) => {
   }).catch(err => res.json(err))
 });
 
+router.get('/likedSpaces', (req, res) => {
+  const favoriteSpaces = req.user.favoriteSpaces;
+  Space.find({ '_id': { $in: favoriteSpaces } }).then(response => {
+    res.json(response)
+  }).catch(err => console.log(err))
+})
+
 router.get('/:userName', (req, res) => {
-  console.log(req.params.userName)
+  // console.log(req.params.userName)
   User.findOne({ username: req.params.userName }).then(user => {
-    console.log(user)
+    // console.log(user)
     Space.find({ owner: user._id }).then(data => {
       res.json(data);
     });
@@ -34,7 +41,7 @@ router.post('/:userName/new-space', (req, res) => {
   const removeSpaceFromUrl = (str) => {
     return str.split(" ").join("-")
   }
-  console.log(space, spaceName)
+  // console.log(space, spaceName)
   Space.create({ owner: req.user._id, nodes: space, title: removeSpaceFromUrl(spaceName), ownerName: req.user.username }).then(response => {
     res.json(response)
   }).catch(err => {
@@ -64,7 +71,7 @@ router.post('/:userName/:spaceName/delete', (req, res) => {
 });
 
 router.post('/:userName/like-space', (req, res) => {
-  console.log(req.user._id)
+  // console.log(req.user._id)
 
   User.findOneAndUpdate({ _id: req.user.id }, { $push: { favoriteSpaces: req.body.spaceId } }).then(() => {
     res.json({ message: "Added to favorites" })
