@@ -31,9 +31,7 @@ export default class Navbar extends Component {
             )}
             {this.props.user && (
               <li>
-                <Link to={`/user/${this.props.user.username}`}>
-                  {this.state.user.username}
-                </Link>
+                <Link to={`/user/${this.props.user.username}`}>Profile</Link>
               </li>
             )}
             {this.props.user && (

@@ -141,23 +141,22 @@ export default class EditMap extends Component {
       >
         {/* <h1>MAP</h1> */}
         <GenerateScaleBtn generateScale={this.generateScale} />
-        <button className="cbutton5" onClick={this.save}>
+        <button className="cbutton4 saving" onClick={this.save}>
           Save
         </button>
         {this.state.showInputTitle && (
           <>
-            <div className="save">
-              <input
-                className="inputf"
-                name="spaceName"
-                onChange={this.nameSpace}
-                type="text"
-                placeholder="Name your space"
-              />{" "}
-              <button className="cbutton5" onClick={this.saveSpace}>
-                Done
-              </button>
-            </div>
+            <div />
+            <input
+              className="inputf"
+              name="spaceName"
+              onChange={this.nameSpace}
+              type="text"
+              placeholder="Name your space"
+            />{" "}
+            <button className="cbutton4" onClick={this.saveSpace}>
+              Done
+            </button>
           </>
         )}
         {nodes}

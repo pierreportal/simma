@@ -25,60 +25,50 @@ class App extends React.Component {
   };
   render() {
     return (
-      <div>
-        <div className="App landing">
-          <div className="border" />
-          <Navbar
-            className="navv"
-            user={this.state.user}
-            setUser={this.setUser}
+      <div className="App landing">
+        <div className="border" />
+        <Navbar
+          className="navv"
+          user={this.state.user}
+          setUser={this.setUser}
+        />
+        <Switch>
+          <Route
+            path="/login"
+            render={props => (
+              <Login user={this.state.user} setUser={this.setUser} {...props} />
+            )}
           />
-          <Switch>
-            <Route
-              path="/login"
-              render={props => (
-                <Login
-                  user={this.state.user}
-                  setUser={this.setUser}
-                  {...props}
-                />
-              )}
-            />
 
-            <Route path="/signup" component={Signup} />
+          <Route path="/signup" component={Signup} />
 
-            <Route path="/logout" component={Login} />
+          <Route path="/logout" component={Login} />
 
-            {/*
+          {/*
             ACCESS SPACE AND DISPLAY, DISTANCE FUNCTION NOT WORKING ON ROBERT'S COMPUTER
             */}
 
-            <Protected
-              exact
-              path="/user/:userName"
-              redirectPath="/login"
-              setUser={this.setUser}
-              user={this.state.user}
-              component={Profile}
-            />
+          <Protected
+            exact
+            path="/user/:userName"
+            redirectPath="/login"
+            setUser={this.setUser}
+            user={this.state.user}
+            component={Profile}
+          />
 
-            <Protected
-              exact
-              path="/user/:userName/new-space"
-              redirectPath="/login"
-              setUser={this.setUser}
-              user={this.state.user}
-              component={EditMap}
-            />
+          <Protected
+            exact
+            path="/user/:userName/new-space"
+            redirectPath="/login"
+            setUser={this.setUser}
+            user={this.state.user}
+            component={EditMap}
+          />
 
-            <Route
-              exact
-              path="/user/:userName/:spaceName"
-              component={SpaceMap}
-            />
-          </Switch>
-          <Arrows />
-        </div>
+          <Route exact path="/user/:userName/:spaceName" component={SpaceMap} />
+        </Switch>
+        <Arrows />
         <Colorback />
       </div>
     );
