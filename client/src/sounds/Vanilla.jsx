@@ -232,12 +232,12 @@ export default class Vanilla extends Component {
     //set up effect connections
     synth.connect(limiter);
     limiter.fan(
-      // delay,
-      // chorus,
-      // pitchShift,
-      // tremolo,
-      // bitCrusher,
-      // freeVerb,
+      delay,
+      chorus,
+      pitchShift,
+      tremolo,
+      bitCrusher,
+      freeVerb,
       // jcReverb,
       phaser
     );
@@ -325,18 +325,9 @@ export default class Vanilla extends Component {
     //   });
     // }
   }
-  // handleClickOn = () => {
-  //   this.state.synthOn.start(0);
-  //   this.state.synthOff.stop(0);
-  //   Tone.Transport.start();
-  // };
-  // handleClickOff = () => {
-  //   this.state.synthOff.start(0);
-  //   this.state.synthOn.stop(0);
-  //   Tone.Transport.stop();
-  // };
 
   render() {
+    console.log(this.props);
     console.log(this.state.space.start);
     return <div />;
   }

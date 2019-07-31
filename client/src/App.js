@@ -7,7 +7,6 @@ import Signup from "./components/Signup";
 import Protected from "./components/Protected";
 import Profile from "./components/Profile";
 import EditMap from "./edit-mode/EditMap";
-import Vanilla from "./sounds/Vanilla";
 
 class App extends React.Component {
   state = {
@@ -22,7 +21,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Vanilla />
         <h1>Simma</h1>
         <Navbar user={this.state.user} />
         <Switch>
