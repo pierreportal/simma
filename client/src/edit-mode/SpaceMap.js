@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import ListOfSpaces from './LIstOfSpaces'
 
 
 export default class SpaceMap extends Component {
@@ -46,24 +48,41 @@ export default class SpaceMap extends Component {
 
   handleBookmark = () => {
     console.log(this.state.spaceId)
-    axios.post(`/user/${this.state.username}/like-space`, this.state.spaceId, this.props.user._id).then(() => {
+    console.log(this.props.user)
+    axios.post(`/user/${this.state.username}/like-space`, { spaceId: this.state.spaceId, user: this.props.user }).then(() => {
       console.log(`${this.state.title} has been saved iy your bookmarks :)`)
     }).catch(err => console.log(err))
   }
+  handleEditSpace = () => {
+    console.log('Go in edit mode')
+    // go to EditMap with this space in props
 
 
-  componentDidMount = () => {
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.match.params.userName !== this.props.match.params.userName || prevProps.match.params.spaceName !== this.props.match.params.spaceName) {
+      this.load()
+    }
+  }
+  load = () => {
+    console.log("mount")
     const { userName, spaceName } = this.props.match.params
     this.setState({ username: userName })
 
     axios.get(`/user/${userName}/${spaceName}`).then(response => {
+      console.log(response)
       this.setState({
         title: response.data[0].title,
-        nodes: this.state.nodes.concat(response.data[0].nodes),
+        nodes: response.data[0].nodes,
         ownerName: response.data[0].ownerName,
         spaceId: response.data[0]._id
       })
     }).catch(err => console.log(err))
+  }
+
+  componentDidMount = () => {
+    this.load()
   }
 
   render() {
@@ -73,8 +92,14 @@ export default class SpaceMap extends Component {
 
     return (
       <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.distance} >
+        <ListOfSpaces />
         <h4>{this.state.title} by {this.state.username}</h4>
         {this.state.ownerName !== this.state.username && <button onClick={this.handleBookmark}>Like</button>}
+
+
+        {this.state.ownerName === this.state.username && <Link to={`/user/${this.state.username}/edit-space/${this.state.spaceId}`}><button onClick={this.handleEditSpace}>Edit</button></Link>}
+
+
         {nodes}
       </div>
     )

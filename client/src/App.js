@@ -35,13 +35,6 @@ class App extends React.Component {
 
           <Route path='/logout' component={Login} />
 
-          {/*
-            ACCESS SPACE AND DISPLAY, DISTANCE FUNCTION NOT WORKING ON ROBERT'S COMPUTER
-            */}
-
-
-
-
 
           <Protected exact path="/user/:userName" redirectPath="/login"
             setUser={this.setUser}
@@ -54,6 +47,7 @@ class App extends React.Component {
             component={EditMap} />
 
           <Route exact path='/user/:userName/:spaceName' component={SpaceMap} user={this.state.user} />
+
 
 
         </Switch>

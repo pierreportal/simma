@@ -2,10 +2,16 @@ const express = require("express");
 // const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
-const Space = require('../models/Space.js')
+const Space = require('../models/Space')
+
+router.get('/getall', (req, res) => {
+  Space.find().then(data => {
+    res.json(data)
+  }).catch(err => res.json(err))
+});
 
 router.get('/:userName', (req, res) => {
-  // console.log(req.params.userName)
+  console.log(req.params.userName)
   User.findOne({ username: req.params.userName }).then(user => {
     console.log(user)
     Space.find({ owner: user._id }).then(data => {
@@ -15,13 +21,13 @@ router.get('/:userName', (req, res) => {
 });
 
 
-router.get('/porfolio', (req, res) => {
-  Space.find({ owner: req.user }).then(response => {
-    res.json(response)
-  }).catch(err => {
-    res.json(err)
-  });
-});
+// router.get('/porfolio', (req, res) => {
+//   Space.find({ owner: req.user }).then(response => {
+//     res.json(response)
+//   }).catch(err => {
+//     res.json(err)
+//   });
+// });
 
 router.post('/:userName/new-space', (req, res) => {
   const { space, spaceName } = req.body
@@ -58,21 +64,27 @@ router.post('/:userName/:spaceName/delete', (req, res) => {
 });
 
 router.post('/:userName/like-space', (req, res) => {
-  console.log(req.user.id)
-  Space.findOne({ _id: req.body.spaceId }).then(() => {
-    User.findOneAndUpdate({ username: req.body.user }, { $push: { favoriteSpaces: req.body.spaceId } }).then(() => {
-      res.json({ message: "Added to favorites" })
-    })
+  console.log(req.user._id)
+
+  User.findOneAndUpdate({ _id: req.user.id }, { $push: { favoriteSpaces: req.body.spaceId } }).then(() => {
+    res.json({ message: "Added to favorites" })
+
   }).catch(err => res.json(err))
 })
 
-router.get('/getall', (req, res) => {
-  console.log('request received')
-  Space.find().then(data => {
-    console.log(data)
-    res.json(data)
-  }).catch(err => res.json(err))
-});
+
 
 module.exports = router
+
+
+
+
+
+
+/*
+
+
+      try to get list of x first spaces from database in random order and display as list in Spacemap.
+
+*/
 

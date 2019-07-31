@@ -19,7 +19,7 @@ export default class Navbar extends Component {
           <ul>
             {!this.props.user && <li> <Link to='/login'>Log in</Link></li>}
             {!this.props.user && <li> <Link to='/signup'>Sign up</Link></li>}
-            {this.props.user && <li><Link to={`/user/${this.props.user.username}`}>{this.state.user.username}</Link></li>}
+            {this.props.user && <li><Link to={`/user/${this.props.user.username}`}>Profile</Link></li>}
             {this.props.user && <li><Link to={`/user/${this.props.user.username}/new-space`}>New Space</Link></li>}
             {this.props.user && <li><Link onClick={() => this.handleLogout(this.props)} to="/login">Logout</Link></li>}
           </ul>
