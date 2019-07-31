@@ -45,7 +45,7 @@ class App extends React.Component {
           <Protected exact path="/user/:userName/new-space" redirectPath="/login"
             setUser={this.setUser}
             user={this.state.user}
-            component={EditMap} />
+            component={Sounds} />
           {/* component={RobertSounds}     which will render <EditMap/> */}
 
           <Route exact path='/user/:userName/:spaceName' render={(props) => <Sounds user={this.state.user} {...props} />} />

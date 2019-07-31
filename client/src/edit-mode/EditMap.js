@@ -77,6 +77,7 @@ export default class EditMap extends Component {
         if (zone) {
           n.start = true;
           n.amp = ((150 - dist) / 150).toFixed(1)
+          this.props.playSound(n.note, n.flavor, n.amp)
           // this.soundFunction(n.note, n.flavor, n.amp)
         } else {
           n.start = false;

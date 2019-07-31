@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Tone from "tone";
 import SpaceMap from "../edit-mode/SpaceMap";
+import EditMap from "../edit-mode/EditMap"
 
 export default class Sounds extends Component {
   constructor(props) {
@@ -386,13 +387,14 @@ export default class Sounds extends Component {
 
 
   render() {
-    console.log(this.state);
-    console.log(flavors.vanilla);
+    // console.log(this.state);
+    // console.log(flavors.vanilla);
+    console.log(this.props.match.params)
     return (
-      <div>
-        {/* <button onClick={this.handleClick}>Set State</button> */}
-        <SpaceMap user={this.props.user} {...this.props} playSound={this.playSound} />
-      </div>
+      < div >
+        {this.props.match.params.spaceName ? < SpaceMap user={this.props.user} {...this.props} playSound={this.playSound} /> :
+          < EditMap user={this.props.user} {...this.props} playSound={this.playSound} />}
+      </div >
     );
   }
 }
