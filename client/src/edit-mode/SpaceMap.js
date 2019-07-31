@@ -54,6 +54,18 @@ export default class SpaceMap extends Component {
       console.log(`${this.state.title} has been saved iy your bookmarks :)`)
     }).catch(err => console.log(err))
   }
+  handleUnlike = () => {
+    axios.post(`/user/${this.state.username}/unlike-space`, { spaceId: this.state.spaceId, user: this.props.user }).then(() => {
+      console.log(`${this.state.title} has been saved iy your bookmarks :)`)
+    }).catch(err => console.log(err))
+  }
+
+
+
+
+
+
+
   handleEditSpace = () => {
     console.log('Go in edit mode')
     // go to EditMap with this space in props
@@ -85,19 +97,42 @@ export default class SpaceMap extends Component {
     this.load()
   }
 
+
+
   render() {
     const nodes = this.state.nodes.map(n => {
       return <div key={n.id} style={{ position: 'absolute', left: n.position[0], top: n.position[1] }}>{(n.amp)}</div>
     })
+
+    // const likeBtn = () => {
+    //   if (this.state.ownerName !== this.props.user.username) {
+    //     if (!this.props.user.favoriteSpaces.includes(this.state.spaceId)) {
+    //       return <button onClick={this.handleBookmark}>Like</button>
+    //     } else {
+    //       return <button onClick={this.handleBookmark}>Unlike</button>
+    //     }
+    //   }
+    // }
     console.log(this.props.user)
     return (
       <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.distance} >
         <ListOfSpaces />
         <h4>{this.state.title} by {this.state.username}</h4>
-        {this.state.ownerName !== this.props.user.username && <button onClick={this.handleBookmark}>Like</button>}
+
+
+        {this.state.ownerName !== this.props.user.username ?
+          !this.props.user.favoriteSpaces.includes(this.state.spaceId) ?
+            <button onClick={this.handleBookmark}>Like</button>
+            :
+            <button onClick={this.handleUnlike}>Unlike</button>
+          : null
+        }
+
+
+
         {this.state.ownerName === this.props.user.username && <Link to={`/user/${this.state.username}/edit-space/${this.state.spaceId}`}><button onClick={this.handleEditSpace}>Edit</button></Link>}
         {nodes}
-      </div>
+      </div >
     )
   }
 }

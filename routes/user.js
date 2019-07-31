@@ -79,6 +79,14 @@ router.post('/:userName/like-space', (req, res) => {
   }).catch(err => res.json(err))
 })
 
+router.post('/:userName/unlike-space', (req, res) => {
+
+  // User.findOneAndUpdate({ _id: req.user.id }, { $push: { favoriteSpaces: req.body.spaceId } }).then(() => {
+  //   res.json({ message: "Added to favorites" })
+
+  // }).catch(err => res.json(err))
+})
+
 
 
 module.exports = router
