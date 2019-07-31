@@ -23,7 +23,12 @@ export default class SpaceMap extends Component {
   mouseUp = () => {
     this.setState({
       mouseDown: false,
-      nodes: this.state.nodes.map(n => { n.amp = 0; n.start = false; return n })
+      nodes: this.state.nodes.map(n => {
+        n.amp = 0;
+        n.start = false;
+        this.props.stopSound(n.note)
+        return n;
+      })
     })
   }
 
@@ -51,8 +56,6 @@ export default class SpaceMap extends Component {
   }
   // ############################################### like Space --> ALL GOOD
   handleBookmark = () => {
-    // console.log(this.state.spaceId)
-    // console.log(this.props.user)
     axios.post(`/user/${this.state.username}/like-space`, { spaceId: this.state.spaceId, user: this.props.user }).then(() => {
       console.log(`${this.state.title} has been saved iy your bookmarks :)`)
     }).catch(err => console.log(err))
@@ -66,7 +69,6 @@ export default class SpaceMap extends Component {
   // ############################################### Edit Space --> TO DO
   handleEditSpace = () => {
     console.log('Go in edit mode')
-    // go to EditMap with this space in props
   }
   componentDidMount = () => {
     this.load()
@@ -79,12 +81,9 @@ export default class SpaceMap extends Component {
   }
 
   load = () => {
-    // console.log("mount")
     const { userName, spaceName } = this.props.match.params
     this.setState({ username: userName })
-
     axios.get(`/user/${userName}/${spaceName}`).then(response => {
-      // console.log(response)
       this.setState({
         title: response.data[0].title,
         nodes: response.data[0].nodes,
@@ -96,16 +95,15 @@ export default class SpaceMap extends Component {
 
 
   render() {
+    this.props.activateKeys(this.state.nodes);
     const nodes = this.state.nodes.map(n => {
       return <div key={n.id} style={{ position: 'absolute', left: n.position[0], top: n.position[1] }}>{(n.amp)}</div>
     })
 
-    // console.log(this.props.user)
     return (
       <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.distance} >
         <ListOfSpaces />
         <h4>{this.state.title} by {this.state.username}</h4>
-
 
         {this.state.ownerName !== this.props.user.username ?
           !this.props.user.favoriteSpaces.includes(this.state.spaceId) ?

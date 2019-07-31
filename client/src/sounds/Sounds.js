@@ -349,30 +349,27 @@ export default class Sounds extends Component {
 
 
   playSound = (...args) => {
-
     let note = args[0]
-    let flavor = args[1]
+    // let flavor = args[1]
     let amp = args[2]
-    this.activateKeys(note, flavor, amp) // go through keyboard object to play truth keys
-    // console.log(note, amp, flavor)
+    console.log('CHANGING AMP FOR :')
+    console.log(note, amp)
+    // change playing notes amplitudes.
   }
 
-  activateKeys = (note, flavor, amp) => {
-    Object.keys(keyboard).forEach(key => {
-      if (note.includes(key)) {
-        keyboard[key].play = true;
-        keyboard[key].flavor = flavor;
-        keyboard[key].amp = amp
-        console.log(keyboard[key])
-        this.setState({
-          [key]: true
-        })
-      }
-    })
-
+  activateKeys = (scale) => {
+    console.log('START ACTIVATE KEYS WITH AMP 0 :')
+    console.log(scale)
+    // play every notes freq with their flavor and amplitude set to 0.
   }
 
-
+  stopSound = (note) => {
+    let n = note
+    let amp = 0
+    console.log('CHANGING AMP FOR :')
+    console.log(n, amp)
+    // change playing notes amplitudes.
+  }
 
 
 
@@ -392,27 +389,27 @@ export default class Sounds extends Component {
     console.log(this.props.match.params)
     return (
       < div >
-        {this.props.match.params.spaceName ? < SpaceMap user={this.props.user} {...this.props} playSound={this.playSound} /> :
-          < EditMap user={this.props.user} {...this.props} playSound={this.playSound} />}
+        {this.props.match.params.spaceName ? < SpaceMap user={this.props.user} {...this.props} activateKeys={this.activateKeys} playSound={this.playSound} stopSound={this.stopSound} /> :
+          < EditMap user={this.props.user} {...this.props} activateKeys={this.activateKeys} playSound={this.playSound} stopSound={this.stopSound} />}
       </div >
     );
   }
 }
 
-const keyboard = {
-  'C': { play: false, flavor: '', note: 'C', amp: 0. },
-  'C#': { play: false, flavor: '', note: 'C#', amp: 0. },
-  'D': { play: false, flavor: '', note: 'D', amp: 0. },
-  'D#': { play: false, flavor: '', note: 'D#', amp: 0. },
-  'E': { play: false, flavor: '', note: 'E', amp: 0. },
-  'F': { play: false, flavor: '', note: 'F', amp: 0. },
-  'F#': { play: false, flavor: '', note: 'F#', amp: 0. },
-  'G': { play: false, flavor: '', note: 'G', amp: 0. },
-  'G#': { play: false, flavor: '', note: 'G#', amp: 0. },
-  'A': { play: false, flavor: '', note: 'A', amp: 0. },
-  'A#': { play: false, flavor: '', note: 'A#', amp: 0. },
-  'B': { play: false, flavor: '', note: 'B', amp: 0. },
-}
+// const keyboard = {
+//   'C': { play: false, flavor: '', note: 'C', amp: 0. },
+//   'C#': { play: false, flavor: '', note: 'C#', amp: 0. },
+//   'D': { play: false, flavor: '', note: 'D', amp: 0. },
+//   'D#': { play: false, flavor: '', note: 'D#', amp: 0. },
+//   'E': { play: false, flavor: '', note: 'E', amp: 0. },
+//   'F': { play: false, flavor: '', note: 'F', amp: 0. },
+//   'F#': { play: false, flavor: '', note: 'F#', amp: 0. },
+//   'G': { play: false, flavor: '', note: 'G', amp: 0. },
+//   'G#': { play: false, flavor: '', note: 'G#', amp: 0. },
+//   'A': { play: false, flavor: '', note: 'A', amp: 0. },
+//   'A#': { play: false, flavor: '', note: 'A#', amp: 0. },
+//   'B': { play: false, flavor: '', note: 'B', amp: 0. },
+// }
 
 
 let flavors = {

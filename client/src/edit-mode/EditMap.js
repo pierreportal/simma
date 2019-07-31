@@ -4,10 +4,6 @@ import { Greek } from './editModeConstants'
 import Draggable from 'react-draggable';
 import axios from 'axios';
 
-// import Vanilla from '../sounds/Vanilla'
-// import Mint from '../sounds/Mint'
-// import Grappe from '../sounds/Grappe'
-
 
 export default class EditMap extends Component {
   state = {
@@ -40,14 +36,11 @@ export default class EditMap extends Component {
   move = (e, id) => {
     let dragX = e.clientX
     let dragY = e.clientY
-    // const movingNode = this.state.space.find(n => n.id === id)
-
     this.setState({
       space: this.state.space.map(n => {
         if (n.id === id) {
           n.position[0] = dragX;
           n.position[1] = dragY;
-          // console.log(n.position)
         }
         return n
       })
@@ -55,12 +48,13 @@ export default class EditMap extends Component {
   }
   save = () => {
     this.setState({ showInputTitle: true })
-    // axios.post('user/portfolio')
   }
+
   nameSpace = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value })
   }
+
   saveSpace = () => {
     console.log(this.state)
     axios.post(`/user/${this.props.user.username}/new-space`, this.state).then(() => {
@@ -78,37 +72,22 @@ export default class EditMap extends Component {
           n.start = true;
           n.amp = ((150 - dist) / 150).toFixed(1)
           this.props.playSound(n.note, n.flavor, n.amp)
-          // this.soundFunction(n.note, n.flavor, n.amp)
         } else {
           n.start = false;
           n.amp = 0
-          // this.setState({ soundComponents: [] })
         }
         return n
       })
     })
   }
+
   hideInstruction = () => {
     this.setState({
       showInstruction: false
     })
   }
 
-  // soundFunction = (freq, flavor, amp) => {
-  //   const flavors = {
-  //     'vanilla': <Vanilla note={freq} amp={amp} />,
-  //     'grappe': <Grappe note={freq} amp={amp} />,
-  //     'mint': <Mint note={freq} amp={amp} />,
-  //   }
-  //   console.log(flavors[flavor].props)
-  //   //return flavors[flavor]
-  //   this.setState({
-  //     soundComponents: [...new Set(this.state.soundComponents.concat(flavors[flavor]))]
-  //   })
-  // }
-
   render() {
-
 
     const nodes = this.state.space && this.state.space.map(n => {
       let nodeStyle = {
@@ -121,7 +100,6 @@ export default class EditMap extends Component {
         top: 0,
       }
 
-
       const position = { x: n.position[0], y: n.position[1] }
       return <div key={n.id}>
 
@@ -130,7 +108,6 @@ export default class EditMap extends Component {
           <div style={nodeStyle}>
             <button style={{ border: 'none', background: 'none', margin: '6px' }} onClick={() => this.handleDelete(n.id)} >x</button>
             <p>{String(n.amp)}</p>
-            {/* <p>{String(n.start)}</p> */}
           </div>
 
         </Draggable>
@@ -139,7 +116,6 @@ export default class EditMap extends Component {
 
     return (
       <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseDown={this.hideInstruction} onMouseMove={this.distance} >
-        {/* <h1>MAP</h1> */}
         {this.state.showInstruction && <h3 style={{ marginTop: '160px' }}>create your scale here</h3>}
         <GenerateScaleBtn generateScale={this.generateScale} />
         {this.state.space && <button onClick={this.save}>Save</button>}
