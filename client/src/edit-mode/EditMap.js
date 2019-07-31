@@ -4,7 +4,6 @@ import { Greek } from './editModeConstants'
 import Draggable from 'react-draggable';
 import axios from 'axios';
 
-
 export default class EditMap extends Component {
   state = {
     space: this.props.nodes ? this.props.nodes : null,
@@ -12,7 +11,6 @@ export default class EditMap extends Component {
     showInstruction: true,
     spaceName: '',
     soundComponents: []
-
   }
 
   handleDelete = id => {
@@ -25,6 +23,7 @@ export default class EditMap extends Component {
     const univers = new Greek();
     const generatedScale = univers.scale(rootNote, accidental, octave, scale, flavor);
     console.log(generatedScale)
+    this.props.activateKeys(generatedScale)
     this.state.space ?
       this.setState({
         space: this.state.space.concat(generatedScale),
@@ -122,7 +121,6 @@ export default class EditMap extends Component {
         {this.state.showInputTitle && <><input name="spaceName" onChange={this.nameSpace} type="text" placeholder="Name your space" /> <button onClick={this.saveSpace}>Done</button></>}
         {nodes}
         {this.state.soundComponents && this.state.soundComponents}
-
       </div>
     )
   }

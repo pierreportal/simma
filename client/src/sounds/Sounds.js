@@ -349,15 +349,22 @@ export default class Sounds extends Component {
 
 
   playSound = (...args) => {
-    let note = args[0]
+    let note = args[0];
     // let flavor = args[1]
-    let amp = args[2]
-    console.log('CHANGING AMP FOR :')
-    console.log(note, amp)
+    let amp = args[2];
+    console.log("CHANGING AMP FOR :");
+    console.log(note, amp);
+    this.setState({
+      globalChannel: {
+        volume: amp * 100 * -1
+      }
+    });
+    console.log(this.state.globalChannel.volume);
     // change playing notes amplitudes.
-  }
+  };
 
   activateKeys = (scale) => {
+
     console.log('START ACTIVATE KEYS WITH AMP 0 :')
     console.log(scale)
     // play every notes freq with their flavor and amplitude set to 0.

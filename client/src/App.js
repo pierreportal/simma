@@ -6,7 +6,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Protected from "./components/Protected";
 import Profile from "./components/Profile";
-import EditMap from "./edit-mode/EditMap"
+// import EditMap from "./edit-mode/EditMap"
 // import SpaceMap from "./edit-mode/SpaceMap"
 import Landing from './components/Landing'
 import Sounds from './sounds/Sounds';
