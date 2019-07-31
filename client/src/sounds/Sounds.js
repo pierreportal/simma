@@ -340,14 +340,50 @@ export default class Sounds extends Component {
   // handleClick = () => {
   //   this.setState(flavors.vanilla);
   // };
+
+
+
+
+
+
+
   playSound = (...args) => {
 
     let note = args[0]
     let flavor = args[1]
     let amp = args[2]
-
-    console.log(note, amp, flavor)
+    this.activateKeys(note, flavor, amp) // go through keyboard object to play truth keys
+    // console.log(note, amp, flavor)
   }
+
+  activateKeys = (note, flavor, amp) => {
+    Object.keys(keyboard).forEach(key => {
+      if (note.includes(key)) {
+        keyboard[key].play = true;
+        keyboard[key].flavor = flavor;
+        keyboard[key].amp = amp
+        console.log(keyboard[key])
+        this.setState({
+          [key]: true
+        })
+      }
+    })
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   render() {
     console.log(this.state);
@@ -360,6 +396,22 @@ export default class Sounds extends Component {
     );
   }
 }
+
+const keyboard = {
+  'C': { play: false, flavor: '', note: 'C', amp: 0. },
+  'C#': { play: false, flavor: '', note: 'C#', amp: 0. },
+  'D': { play: false, flavor: '', note: 'D', amp: 0. },
+  'D#': { play: false, flavor: '', note: 'D#', amp: 0. },
+  'E': { play: false, flavor: '', note: 'E', amp: 0. },
+  'F': { play: false, flavor: '', note: 'F', amp: 0. },
+  'F#': { play: false, flavor: '', note: 'F#', amp: 0. },
+  'G': { play: false, flavor: '', note: 'G', amp: 0. },
+  'G#': { play: false, flavor: '', note: 'G#', amp: 0. },
+  'A': { play: false, flavor: '', note: 'A', amp: 0. },
+  'A#': { play: false, flavor: '', note: 'A#', amp: 0. },
+  'B': { play: false, flavor: '', note: 'B', amp: 0. },
+}
+
 
 let flavors = {
   vanilla: {
