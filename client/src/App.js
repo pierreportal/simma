@@ -45,8 +45,11 @@ class App extends React.Component {
             setUser={this.setUser}
             user={this.state.user}
             component={EditMap} />
+          {/* component={RobertSounds}     which will render <EditMap/> */}
 
-          <Route exact path='/user/:userName/:spaceName' component={SpaceMap} user={this.state.user} />
+          <Route exact path='/user/:userName/:spaceName' render={(props) => <SpaceMap user={this.state.user} {...props} />} />
+          {/* component={RobertSounds}     which will render <SpaceMap/> */}
+          {/* render={(props) => <Login user={this.state.user} setUser={this.setUser} {...props} />} /> */}
 
 
 

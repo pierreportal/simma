@@ -36,6 +36,7 @@ export default class SpaceMap extends Component {
           if (zone) {
             n.start = true;
             n.amp = ((150 - dist) / 150).toFixed(1)
+            // this.props.robertsSound(note, amp, flavor)
           } else {
             n.start = false;
             n.amp = 0
@@ -56,8 +57,6 @@ export default class SpaceMap extends Component {
   handleEditSpace = () => {
     console.log('Go in edit mode')
     // go to EditMap with this space in props
-
-
   }
 
   componentDidUpdate = (prevProps) => {
@@ -65,6 +64,7 @@ export default class SpaceMap extends Component {
       this.load()
     }
   }
+
   load = () => {
     console.log("mount")
     const { userName, spaceName } = this.props.match.params
@@ -89,20 +89,15 @@ export default class SpaceMap extends Component {
     const nodes = this.state.nodes.map(n => {
       return <div key={n.id} style={{ position: 'absolute', left: n.position[0], top: n.position[1] }}>{(n.amp)}</div>
     })
-
+    console.log(this.props.user)
     return (
       <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.distance} >
         <ListOfSpaces />
         <h4>{this.state.title} by {this.state.username}</h4>
-        {this.state.ownerName !== this.state.username && <button onClick={this.handleBookmark}>Like</button>}
-
-
-        {this.state.ownerName === this.state.username && <Link to={`/user/${this.state.username}/edit-space/${this.state.spaceId}`}><button onClick={this.handleEditSpace}>Edit</button></Link>}
-
-
+        {this.state.ownerName !== this.props.user.username && <button onClick={this.handleBookmark}>Like</button>}
+        {this.state.ownerName === this.props.user.username && <Link to={`/user/${this.state.username}/edit-space/${this.state.spaceId}`}><button onClick={this.handleEditSpace}>Edit</button></Link>}
         {nodes}
       </div>
     )
   }
 }
-

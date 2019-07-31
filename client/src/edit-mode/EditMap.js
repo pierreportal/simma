@@ -13,8 +13,10 @@ export default class EditMap extends Component {
   state = {
     space: null,
     showInputTitle: false,
+    showInstruction: true,
     spaceName: '',
     soundComponents: []
+
   }
 
   handleDelete = id => {
@@ -85,6 +87,12 @@ export default class EditMap extends Component {
       })
     })
   }
+  hideInstruction = () => {
+    this.setState({
+      showInstruction: false
+    })
+  }
+
   // soundFunction = (freq, flavor, amp) => {
   //   const flavors = {
   //     'vanilla': <Vanilla note={freq} amp={amp} />,
@@ -129,8 +137,9 @@ export default class EditMap extends Component {
     })
 
     return (
-      <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseMove={this.distance} >
+      <div className='map' style={{ width: '100vw', height: '100vh' }} onMouseDown={this.hideInstruction} onMouseMove={this.distance} >
         {/* <h1>MAP</h1> */}
+        {this.state.showInstruction && <h3 style={{ marginTop: '160px' }}>create your scale here</h3>}
         <GenerateScaleBtn generateScale={this.generateScale} />
         {this.state.space && <button onClick={this.save}>Save</button>}
         {this.state.showInputTitle && <><input name="spaceName" onChange={this.nameSpace} type="text" placeholder="Name your space" /> <button onClick={this.saveSpace}>Done</button></>}
