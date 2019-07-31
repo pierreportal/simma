@@ -3,7 +3,7 @@ import GenerateScaleBtn from "./GenerateScaleBtn";
 import { Greek } from "./editModeConstants";
 import Draggable from "react-draggable";
 import axios from "axios";
-import Colorback from "../exp-mode/components/Colorback";
+// import Colorback from "../exp-mode/components/Colorback";
 
 export default class EditMap extends Component {
   state = {
@@ -122,7 +122,6 @@ export default class EditMap extends Component {
               defaultPosition={position}
               onDrag={e => this.move(e, n.id)}
             >
-              ​
               <div style={nodeStyle}>
                 <button
                   style={{ border: "none", background: "none", margin: "6px" }}
@@ -132,7 +131,6 @@ export default class EditMap extends Component {
                 </button>
                 <p>{String(n.amp)}</p>
               </div>
-              ​
             </Draggable>
           </div>
         );
@@ -169,7 +167,7 @@ export default class EditMap extends Component {
           </>
         )}
         {nodes}
-        <Colorback />
+        {/* <Colorback /> */}
         {this.state.soundComponents && this.state.soundComponents}​
       </div>
     );

@@ -21,12 +21,13 @@ export default class Colorback extends Component {
       // figure out how to make xy with in rgb range
       tempX = Math.floor(scale(tempX, 0, window.innerWidth, 0, 255));
       tempY = Math.floor(scale(tempY, 0, window.innerHeight, 0, 255));
-
-      body[0].style.backgroundImage = ` linear-gradient(
+      if (body.length > 0) {
+        body[0].style.backgroundImage = ` linear-gradient(
         to right,
         rgba(${tempX}, 0, ${tempY}),
         rgba(${tempY}, 0, 0)
       )`;
+      }
       console.log("X coordinate: " + tempX);
       console.log("Y coordinate: " + tempY);
 
