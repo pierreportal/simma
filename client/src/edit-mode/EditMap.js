@@ -23,13 +23,14 @@ export default class EditMap extends Component {
     const univers = new Greek();
     const generatedScale = univers.scale(rootNote, accidental, octave, scale, flavor);
     console.log(generatedScale)
-    this.props.activateKeys(generatedScale)
+    // this.props.activateKeys(generatedScale)
     this.state.space ?
       this.setState({
         space: this.state.space.concat(generatedScale),
       }) : this.setState({
         space: generatedScale,
-      });
+      })
+
   }
 
   move = (e, id) => {
@@ -70,7 +71,10 @@ export default class EditMap extends Component {
         if (zone) {
           n.start = true;
           n.amp = ((150 - dist) / 150).toFixed(1)
-          this.props.playSound(n.note, n.flavor, n.amp)
+          // this.props.playSound(n.note, n.flavor, n.amp)
+          this.state.space.map(x => {
+            return x.synth.triggerAttackRelease("C4", "8n");
+          })
         } else {
           n.start = false;
           n.amp = 0

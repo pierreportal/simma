@@ -4,6 +4,10 @@ const accidentals = ['#', 'n', 'b']
 //(♯), flat (♭), and natural (♮)
 const octaves = [1, 2, 3, 4, 5]
 const flavors = ['vanilla', 'mint', 'grappe']
+const Tone = require("tone")
+
+
+
 
 const uuidv1 = require('uuid/v1');
 
@@ -18,30 +22,32 @@ class Greek {
     }
     scale(rootNote, accidental, ove, mode, flavor) {
 
-        // console.log('\n', rootNote, accidental, ove, mode, '\n')
-
         const accRootNote = this.notes.find(n => n.includes(rootNote + accidental))
 
         let prevIntervals = this.intervals.slice()
         let newIntervals = prevIntervals.splice(this.modes.indexOf(mode)).concat(prevIntervals.map(x => x + 12));
         newIntervals = newIntervals.map(x => x - newIntervals[0]);
         let newScale = newIntervals.map(x => this.notes[(this.notes.indexOf(accRootNote) + x) % 12])
-        // console.log(`\n SCALE: ${newScale}\n`)
-        // let newScaleFreq = newIntervals.map(x => this.freq[(this.notes.indexOf(accRootNote) + x) % 12])
         const scales = newScale.map(x => {
             let id = uuidv1()
             return {
                 note: (x.includes('#') ? x.split('/')[0] : x.includes('n') ? x.split('n')[0] : x).concat(String(ove)),
-                //let arr3 = arr.map(x => {return x.includes('#') ? x.split('/')[0]: x.includes('n') ? x.split('n')[0] : x})
                 position: [parseInt(Math.random() * window.innerWidth), parseInt(Math.random() * (window.innerHeight - 300) + 300)],
                 id: id,
                 start: false,
                 amp: 0.,
                 flavor: flavor,
-                actave: ove
+                actave: ove,
+                synth: new Tone.MonoSynth({
+                    "oscillator": {
+                        "type": "square"
+                    },
+                    "envelope": {
+                        "attack": 0.1
+                    }
+                }).toMaster()
             }
         });
-
         return scales
     }
 }
