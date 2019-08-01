@@ -82,7 +82,7 @@ export default class EditMap extends Component {
     }
     // console.log(space);
     axios
-      .post(`/user/${this.props.user.username}/new-space`, {
+      .post(`/api/user/${this.props.user.username}/new-space`, {
         ...this.state,
         space
       })

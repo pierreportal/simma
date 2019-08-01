@@ -13,7 +13,7 @@ export default class Profile extends Component {
   };
   componentDidMount = () => {
     axios
-      .get(`/user/${this.props.user.username}`)
+      .get(`/api/user/${this.props.user.username}`)
       .then(response => {
         this.setState({
           portfolio: this.state.portfolio.concat(response.data)

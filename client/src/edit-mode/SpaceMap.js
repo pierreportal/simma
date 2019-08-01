@@ -62,7 +62,7 @@ export default class SpaceMap extends Component {
   // ############################################### like Space --> ALL GOOD
   handleBookmark = () => {
     axios
-      .post(`/user/${this.state.username}/like-space`, {
+      .post(`/api/user/${this.state.username}/like-space`, {
         spaceId: this.state.spaceId,
         user: this.props.user
       })
@@ -73,7 +73,7 @@ export default class SpaceMap extends Component {
   };
   handleUnlike = () => {
     axios
-      .post(`/user/${this.state.username}/unlike-space`, {
+      .post(`/api/user/${this.state.username}/unlike-space`, {
         spaceId: this.state.spaceId,
         user: this.props.user
       })
@@ -105,7 +105,7 @@ export default class SpaceMap extends Component {
     const { userName, spaceName } = this.props.match.params;
     this.setState({ username: userName });
     axios
-      .get(`/user/${userName}/${spaceName}`)
+      .get(`/api/user/${userName}/${spaceName}`)
       .then(response => {
         // console.log(response.data);
         this.setState(

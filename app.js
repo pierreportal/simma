@@ -82,7 +82,7 @@ const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
 
 const userRoutes = require('./routes/user');
-app.use('/user', userRoutes);
+app.use('/api/user', userRoutes);
 
 app.use((req, res) => {
   res.sendFile(__dirname + "/client/build/index.html")

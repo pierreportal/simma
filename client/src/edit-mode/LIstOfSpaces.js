@@ -8,7 +8,7 @@ export default class LIstOfSpaces extends Component {
   }
   componentDidMount = () => {
     console.log('component mounted list of spaces')
-    axios.get('/user/getall').then(response => {
+    axios.get('/api/user/getall').then(response => {
       console.log(response.data)
       this.setState({
         list: response.data
