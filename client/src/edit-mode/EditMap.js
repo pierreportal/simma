@@ -38,17 +38,17 @@ export default class EditMap extends Component {
       scale,
       flavor
     );
-    console.log(generatedScale);
+    // console.log(generatedScale);
     this.state.space
       ? this.setState({
-          space: this.state.space.concat(generatedScale).map(n => {
-            return { ...n, synth: new Tone.MonoSynth(n.flavor).toMaster() };
-            // return n.synth.triggerAttack(n.note)
-          })
+        space: this.state.space.concat(generatedScale).map(n => {
+          return { ...n, synth: new Tone.MonoSynth(n.flavor).toMaster() };
+          // return n.synth.triggerAttack(n.note)
         })
+      })
       : this.setState({
-          space: generatedScale
-        });
+        space: generatedScale
+      });
   };
 
   move = (e, id) => {
@@ -80,14 +80,14 @@ export default class EditMap extends Component {
       const { synth, ...rest } = this.state.space[node];
       space.push(rest);
     }
-    console.log(space);
+    // console.log(space);
     axios
       .post(`/user/${this.props.user.username}/new-space`, {
         ...this.state,
         space
       })
       .then(() => {
-        console.log("done");
+        // console.log("done");
         this.setState({ showInputTitle: false });
       })
       .catch(err => console.log(err));
@@ -99,7 +99,7 @@ export default class EditMap extends Component {
         space: this.state.space.map(n => {
           let dist = Math.sqrt(
             Math.pow(n.position[0] - e.clientX, 2) +
-              Math.pow(n.position[1] - e.clientY, 2)
+            Math.pow(n.position[1] - e.clientY, 2)
           );
           let zone = dist < 150;
           if (zone) {
@@ -142,7 +142,7 @@ export default class EditMap extends Component {
         const position = { x: n.position[0], y: n.position[1] };
         return (
           <div key={n.id}>
-            ​
+
             <Draggable
               defaultPosition={position}
               onDrag={e => this.move(e, n.id)}
@@ -182,10 +182,10 @@ export default class EditMap extends Component {
             Hide note
           </button>
         ) : (
-          <button className="cbutton6" onClick={this.displayNoteName}>
-            Display note
+            <button className="cbutton6" onClick={this.displayNoteName}>
+              Display note
           </button>
-        )}
+          )}
         {this.state.showInputTitle && (
           <>
             <input
@@ -202,7 +202,7 @@ export default class EditMap extends Component {
         )}
         {nodes}
         {/* <Colorback /> */}
-        {this.state.soundComponents && this.state.soundComponents}​
+        {this.state.soundComponents && this.state.soundComponents}
       </div>
     );
   }
