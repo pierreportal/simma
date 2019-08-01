@@ -6,7 +6,7 @@ export default class SpaceRow extends Component {
   handledelete = id => {
     // console.log(id)
     axios
-      .post("/user/:userName/:spaceName/delete", { id })
+      .post("/api/user/:userName/:spaceName/delete", { id })
       .then(() => console.log("done"))
       .catch(err => console.log(err));
     this.props.updateState(id);
