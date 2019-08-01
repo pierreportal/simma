@@ -136,7 +136,7 @@ export default class SpaceMap extends Component {
             top: n.position[1]
           }}
         >
-          {n.amp}
+          <div className="node" />
         </div>
       );
     });

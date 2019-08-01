@@ -1,5 +1,17 @@
 * {
-}
+  -webkit-touch-callout: none;
+  -webkit-user-select: none; /* Webkit */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE 10  */
+ 
+  /* Currently not supported in Opera but will be soon */
+  -o-user-select: none;
+  user-select: none;
+ }
+ body {
+  background-image: linear-gradient(red, yellow);
+  overflow: hidden;
+ }
 .App {
   font-family: "pressura_light";
   color: white;
@@ -9,9 +21,6 @@ a {
   color: white;
 }
 
-body {
-  background-image: linear-gradient(red, yellow);
-}
 
 .login,
 .signup {
@@ -499,10 +508,18 @@ h3 {
   text-decoration-style: none;
   opacity: 0.65;
  }
+
+
  #placename {
   z-index: 200;
   position: absolute;
   right: 100px;
   top: 5px;
   opacity: 0.65;
+ }
+ .node {
+  background-color: white;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
  }
