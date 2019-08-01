@@ -25,6 +25,10 @@ export default class EditMap extends Component {
   }
 
   generateScale = (scale, rootNote, accidental, octave, flavor) => {
+    this.state.space && this.state.space.map(n => {
+      n.synth.triggerRelease();
+      return n
+    })
     const univers = new Greek();
     const generatedScale = univers.scale(rootNote, accidental, octave, scale, flavor);
     console.log(generatedScale)
@@ -64,9 +68,6 @@ export default class EditMap extends Component {
 
   saveSpace = () => {
     // console.log(this.state)
-
-
-
     const space = []
     for (const node in this.state.space) {
       const { synth, ...rest } = this.state.space[node]
