@@ -7,9 +7,7 @@ export default class LikedSpaces extends Component {
     list: []
   }
   componentDidMount = () => {
-    console.log('component mounted LIKED spaces')
     axios.get('/api/user/likedSpaces', { user: this.props.user }).then(response => {
-      console.log(response.data)
       this.setState({
         list: response.data
       })
