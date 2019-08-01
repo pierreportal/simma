@@ -35,17 +35,29 @@ class Greek {
                 position: [parseInt(Math.random() * window.innerWidth), parseInt(Math.random() * (window.innerHeight - 300) + 300)],
                 id: id,
                 start: false,
-                amp: 0.,
+                // amp: 0.,
+                amp: new Tone.Gain(3),
+
                 flavor: flavor,
                 actave: ove,
+
                 synth: new Tone.MonoSynth({
                     "oscillator": {
-                        "type": "square"
+                        "type": "sawtooth"
                     },
                     "envelope": {
-                        "attack": 0.1
+                        "attack": 0.1,
+                        "release": 0.2
+                    },
+                    "filterEnvelope": {
+                        "attack": 0.9,
+                        "decay": 0.4,
+                        "sustain": 0.01,
+                        "release": 0.2
                     }
+
                 }).toMaster()
+                // ;
             }
         });
         return scales

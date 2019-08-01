@@ -3,6 +3,7 @@ import GenerateScaleBtn from './GenerateScaleBtn';
 import { Greek } from './editModeConstants'
 import Draggable from 'react-draggable';
 import axios from 'axios';
+import Tone from 'tone'
 
 export default class EditMap extends Component {
   state = {
@@ -26,10 +27,15 @@ export default class EditMap extends Component {
     // this.props.activateKeys(generatedScale)
     this.state.space ?
       this.setState({
-        space: this.state.space.concat(generatedScale),
+        space: this.state.space.concat(generatedScale).map(n => n.synth.triggerAttack(n.note)),
       }) : this.setState({
         space: generatedScale,
+      }, () => {
+        // this.state.space.map(n => {
+        //   return n.synth.triggerAttack(n.note);
+        // })
       })
+    // this.state.space
 
   }
 
@@ -64,20 +70,29 @@ export default class EditMap extends Component {
   }
 
   distance = e => {
+    // let gain = new Tone.Volume()
     this.state.space && this.setState({
       space: this.state.space.map(n => {
         let dist = Math.sqrt(Math.pow((n.position[0] - e.clientX), 2) + Math.pow((n.position[1] - e.clientY), 2))
         let zone = dist < 150
         if (zone) {
           n.start = true;
-          n.amp = ((150 - dist) / 150).toFixed(1)
-          // this.props.playSound(n.note, n.flavor, n.amp)
-          this.state.space.map(x => {
-            return x.synth.triggerAttackRelease("C4", "8n");
-          })
+          // n.amp = ((150 - dist) / 150).toFixed(1)
+
+          // n.amp = gain(((150 - dist) / 150).toFixed(1))
+          // n.amp = new Tone.Volume(0)
+
+          // n.synth.chain(n.amp, Tone.Master)
+          n.synth.triggerAttack(n.note);
+          // console.log(n.synth.envelope.value)
+
         } else {
           n.start = false;
-          n.amp = 0
+
+          console.log(n.synth.envelope.value)
+          // n.amp = new Tone.Volume(-10)
+          // n.synth.chain(n.amp, Tone.Master)
+          n.synth.triggerRelease();
         }
         return n
       })

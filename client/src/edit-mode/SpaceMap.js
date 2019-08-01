@@ -43,10 +43,14 @@ export default class SpaceMap extends Component {
             n.start = true;
             n.amp = ((150 - dist) / 150).toFixed(1)
             // this.props.playSound(n.note, n.flavor, n.amp)
+            n.synth.triggerAttack(n.note);
+            // var vol = ;
+
 
           } else {
             n.start = false;
             n.amp = 0
+            n.synth.triggerRelease();
           }
 
           return n
