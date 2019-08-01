@@ -142,8 +142,8 @@ class Greek {
         note: (x.includes("#")
           ? x.split("/")[0]
           : x.includes("n")
-          ? x.split("n")[0]
-          : x
+            ? x.split("n")[0]
+            : x
         ).concat(String(ove)),
         position: [
           parseInt(Math.random() * window.innerWidth),
@@ -167,7 +167,7 @@ class Greek {
 
 const KeyboardController = (keys, repeat) => {
   var timers = {};
-  document.onkeydown = function(event) {
+  document.onkeydown = function (event) {
     var key = (event || window.event).keyCode;
     if (!(key in keys)) return true;
     if (!(key in timers)) {
@@ -178,7 +178,7 @@ const KeyboardController = (keys, repeat) => {
     return false;
   };
 
-  document.onkeyup = function(event) {
+  document.onkeyup = function (event) {
     var key = (event || window.event).keyCode;
     if (key in timers) {
       if (timers[key] !== null) clearInterval(timers[key]);
@@ -200,7 +200,7 @@ const KeyboardController = (keys, repeat) => {
 //     40: function () { console.log('down'); }
 // }, 100);
 
-module.exports = {
+export {
   modes,
   notes,
   accidentals,

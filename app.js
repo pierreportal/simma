@@ -15,7 +15,7 @@ const flash = require("connect-flash");
 
 
 mongoose
-  .connect('mongodb://localhost/server', { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/server', { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -45,8 +45,8 @@ app.use(require('node-sass-middleware')({
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+app.use(express.static(path.join(__dirname, '/client/build')));
+// app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 hbs.registerHelper('ifUndefined', (value, options) => {
@@ -84,5 +84,7 @@ app.use('/auth', authRoutes);
 const userRoutes = require('./routes/user');
 app.use('/user', userRoutes);
 
-
+app.use((req, res) => {
+  res.sendFile(__dirname + "/client/build/index.html")
+});
 module.exports = app;
