@@ -36,7 +36,7 @@ class Greek {
                 id: id,
                 start: false,
                 // amp: 0.,
-                amp: new Tone.Gain(3),
+                // amp: new Tone.Gain(3),
 
                 flavor: flavor,
                 actave: ove,
@@ -52,8 +52,8 @@ class Greek {
                     "filterEnvelope": {
                         "attack": 0.9,
                         "decay": 0.4,
-                        "sustain": 0.01,
-                        "release": 0.2
+                        "sustain": .7,
+                        "release": 0.4
                     }
 
                 }).toMaster()

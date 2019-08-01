@@ -89,7 +89,7 @@ export default class EditMap extends Component {
         } else {
           n.start = false;
 
-          console.log(n.synth.envelope.value)
+          // console.log(n.synth.envelope.value)
           // n.amp = new Tone.Volume(-10)
           // n.synth.chain(n.amp, Tone.Master)
           n.synth.triggerRelease();
@@ -125,7 +125,7 @@ export default class EditMap extends Component {
 
           <div style={nodeStyle}>
             <button style={{ border: 'none', background: 'none', margin: '6px' }} onClick={() => this.handleDelete(n.id)} >x</button>
-            <p>{String(n.amp)}</p>
+            <p>{String(n.note)}</p>
           </div>
 
         </Draggable>
