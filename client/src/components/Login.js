@@ -65,7 +65,7 @@ export default class Login extends Component {
             Log in
           </button>
           <p className="logp">
-            Don't have an account ? <Link to={"/signup"}>Create one</Link>
+            Don't have an account? <Link to={"/signup"}>Create one</Link>
           </p>
         </form>
         <Colorback />

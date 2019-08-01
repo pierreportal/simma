@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import ListOfSpaces from "./LIstOfSpaces";
 import Blackmask from "./../exp-mode/components/Blackmask";
 import Colorback from "../exp-mode/components/Colorback";
+import Tone from "tone";
 
 export default class SpaceMap extends Component {
   state = {
@@ -27,37 +28,37 @@ export default class SpaceMap extends Component {
       nodes: this.state.nodes.map(n => {
         n.amp = 0;
         n.start = false;
-        this.props.stopSound(n.note);
+        n.synth.triggerRelease();
+        // this.props.stopSound(n.note)
         return n;
       })
     });
   };
-  // ############################################### distance --> need to call Robert's code
 
   distance = e => {
-    if (this.state.mouseDown) {
+    console.log("mo");
+    this.state.mouseDown &&
       this.state.nodes &&
-        this.setState({
-          nodes: this.state.nodes.map(n => {
-            let dist = Math.sqrt(
-              Math.pow(n.position[0] - e.clientX, 2) +
-                Math.pow(n.position[1] - e.clientY, 2)
-            );
-            let zone = dist < 150;
-            if (zone) {
-              n.start = true;
-              n.amp = ((150 - dist) / 150).toFixed(1);
-              this.props.playSound(n.note, n.flavor, n.amp);
-            } else {
-              n.start = false;
-              n.amp = 0;
-            }
-
-            return n;
-          })
-        });
-    }
+      this.setState({
+        nodes: this.state.nodes.map(n => {
+          let dist = Math.sqrt(
+            Math.pow(n.position[0] - e.clientX, 2) +
+              Math.pow(n.position[1] - e.clientY, 2)
+          );
+          let zone = dist < 150;
+          if (zone) {
+            n.start = true;
+            n.synth.triggerAttack(n.note);
+            console.log(n);
+          } else {
+            n.start = false;
+            n.synth.triggerRelease();
+          }
+          return n;
+        })
+      });
   };
+
   // ############################################### like Space --> ALL GOOD
   handleBookmark = () => {
     axios
@@ -100,17 +101,25 @@ export default class SpaceMap extends Component {
   };
 
   load = () => {
+    console.log("LOADING");
     const { userName, spaceName } = this.props.match.params;
     this.setState({ username: userName });
     axios
       .get(`/user/${userName}/${spaceName}`)
       .then(response => {
-        this.setState({
-          title: response.data[0].title,
-          nodes: response.data[0].nodes,
-          ownerName: response.data[0].ownerName,
-          spaceId: response.data[0]._id
-        });
+        console.log(response.data);
+        this.setState(
+          {
+            title: response.data[0].title,
+            nodes: response.data[0].nodes.map(n => {
+              return { ...n, synth: new Tone.MonoSynth(n.flavor).toMaster() };
+              // return n.synth.triggerAttack(n.note)
+            }),
+            ownerName: response.data[0].ownerName,
+            spaceId: response.data[0]._id
+          },
+          () => console.log(this.state)
+        );
       })
       .catch(err => console.log(err));
   };

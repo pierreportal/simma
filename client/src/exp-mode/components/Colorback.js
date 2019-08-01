@@ -28,8 +28,6 @@ export default class Colorback extends Component {
         rgba(${tempY}, 0, 0)
       )`;
       }
-      console.log("X coordinate: " + tempX);
-      console.log("Y coordinate: " + tempY);
 
       return true;
     }

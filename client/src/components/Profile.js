@@ -3,6 +3,7 @@ import axios from "axios";
 import SpaceRow from "../edit-mode/SpaceRow";
 import LikedSpaces from "../edit-mode/LikedSpaces";
 import Colorback from "../exp-mode/components/Colorback";
+import Arrows from "../exp-mode/components/Arrows";
 
 export default class Profile extends Component {
   state = {
@@ -48,6 +49,7 @@ export default class Profile extends Component {
             {/* {otherSpaces} */}
             <Colorback />
             <LikedSpaces user={this.state.user} />
+            <Arrows />
           </div>
         </div>
       </div>

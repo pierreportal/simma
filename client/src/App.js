@@ -69,7 +69,6 @@ class App extends React.Component {
           {/* component={RobertSounds}     which will render <SpaceMap/> */}
           {/* render={(props) => <Login user={this.state.user} setUser={this.setUser} {...props} />} /> */}
         </Switch>
-        <Arrows />
         <Colorback />
       </div>
     );

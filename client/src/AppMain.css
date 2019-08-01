@@ -1,6 +1,5 @@
-/* * {
-  cursor: none;
-} */
+* {
+}
 .App {
   font-family: "pressura_light";
   color: white;
@@ -17,9 +16,9 @@ body {
 .login,
 .signup {
   display: flex;
-  justify-items: center;
+  justify-content: center;
   flex-direction: row;
-  background-color: black;
+  background-color: #161616;
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -29,11 +28,25 @@ body {
   font-size: 0.7rem;
   overflow: hidden;
 }
-
-.logp {
-  font-size: 10px;
+.react-bodymovin-container {
+  height: 40vw;
+}
+.landing2 {
+  background-color: blue;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 0;
+}
+h3 {
+  position: absolute;
   font-family: "pressura_light";
-  font-size: 0.7rem;
+  font-weight: 10;
+  color: white;
+  width: 100vw;
+  top: 25vh;
+  font-size: 10px;
+  text-align: center;
 }
 
 .landing {
@@ -124,7 +137,7 @@ body {
 
 .map {
   background-color: blueviolet;
-  cursor: none;
+  /* cursor: none; */
 }
 
 .hole {
@@ -197,17 +210,15 @@ body {
 .auth-form {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  margin: auto;
-
-  justify-items: center;
-
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
   font-family: "Favorit";
   font-size: 20px;
 }
 
 .authInput {
-  background-color: black;
+  background-color: #161616;
   border: 1px solid white;
   height: 20px;
   font-family: "pressura_light";
@@ -216,17 +227,29 @@ body {
   text-align: center;
   opacity: 1;
   margin: 10px;
+  width: 20vw;
 }
 
 .authButton {
   position: relative;
-  display: flex;
-  background-color: black;
+  background-color: #161616;
   border: 1px solid white;
   color: white;
-  width: 80px;
+  font-family: "pressura_light";
+  font-size: 0.5rem;
+  width: 60px;
+  height: 20px;
+  margin: 10px;
+  text-align: center;
 }
-
+.logp {
+  font-size: 10px;
+  font-family: "pressura_light";
+  font-size: 0.7rem;
+  width: 100vw;
+  text-align: center;
+  position: relative;
+}
 .navbar {
   position: fixed;
   width: 100vw;
@@ -240,43 +263,45 @@ body {
 }
 
 .select-css {
-  display: inline;
   flex-direction: row;
   justify-content: center;
   font-size: 1rem;
   font-family: "pressura_reg";
   font-weight: 700;
-  color: rgb(255, 255, 255);
+  color: white;
   line-height: 1.3;
-  padding: 0.6em 1.4em 0.5em 0.8em;
-  width: 100px;
-  height: 100px;
+  padding: 2em;
+  border: 2px solid white;
+  width: 12vw;
+  height: 12vw;
   max-width: 100%;
   box-sizing: border-box;
-  margin: 0;
-
-  box-shadow: 0 10px 20px 1px rgba(0, 0, 0, 0.4);
-  /* border-radius: 50%; */
+  background-color: rgba(255, 255, 255, 0.05);
+  text-align-last: center;
+  z-index: 200;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  background-color: blue;
+  /* background-color: #f3df63; */
   opacity: 0.8;
   background-repeat: repeat;
   background-position: center;
   background-size: 150%;
 
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to right,
     rgba(200, 0, 197),
     rgba(0, 0, 200)
-  );
+  ); */
 }
 .select-css::-ms-expand {
   display: none;
 }
 .select-css:hover {
-  border: none;
+  border: 2px solid white;
+  box-shadow: inset 10px 1px 10px 0px rgba(0, 0, 0, 0.2);
 }
 .select-css:focus {
   border-color: #aaa;
@@ -285,7 +310,7 @@ body {
   outline: none;
 }
 .select-css option {
-  font-weight: light;
+  font-weight: thick;
 }
 .center {
   display: flex;
@@ -304,24 +329,26 @@ body {
 .cbutton2 {
   font-family: "pressura_light";
   display: block;
-  width: 200px;
   border-radius: 0em;
   height: 20px;
   position: absolute;
   background-color: blue;
   color: white;
-  top: -150px;
+  left: 40%;
+  top: 250px;
+  width: 20%;
 }
 .cbutton3 {
   font-family: "pressura_light";
   display: block;
-  width: 200px;
   border-radius: 0em;
   height: 20px;
-  position: relative;
+  position: absolute;
   background-color: blue;
   color: white;
+  left: 41.25%;
   top: 60px;
+  width: 17.5%;
 }
 .cbutton4 {
   font-family: "pressura_light";
@@ -329,11 +356,12 @@ body {
   width: 200px;
   border-radius: 0em;
   height: 20px;
-  position: relative;
+  position: absolute;
   background-color: blue;
   color: white;
-  top: 60px;
-  left: 900px;
+  left: 41.25%;
+  top: 90px;
+  width: 17.5%;
 }
 
 .cbutton5 {
@@ -344,11 +372,43 @@ body {
   height: 20px;
   background-color: blue;
   color: white;
-  left: 200px;
-  top: 400px;
-  position: relative;
+  left: 41.25%;
+  top: 150px;
+  width: 17.5%;
+  position: absolute;
+}
+.cbutton6 {
+  font-family: "pressura_light";
+  display: block;
+  width: 200px;
+  border-radius: 0em;
+  height: 20px;
+  background-color: blue;
+  color: white;
+  left: 41.25%;
+  top: 250px;
+  width: 17.5%;
+  position: absolute;
 }
 
+.inputf {
+  background-color: rgba(0, 0, 0, 0.15);
+  height: 20px;
+
+  font-family: "pressura_light";
+  font-size: 10px;
+  color: white;
+  text-align: center;
+  opacity: 1;
+  border: none;
+  position: absolute;
+  left: 41.25%;
+  top: 120px;
+  width: 17.5%;
+}
+::-webkit-input-placeholder {
+  color: white;
+}
 .save {
   display: block;
   justify-content: center;
@@ -359,21 +419,9 @@ body {
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  width: 70vw;
-  top: 250px;
+  width: 90vw;
+  top: 35vh;
   z-index: 150;
-}
-
-.inputf {
-  background-color: blue;
-  height: 50px;
-  font-family: "Favorit";
-  font-size: 20px;
-  color: white;
-  text-align: center;
-  opacity: 0.4;
-  border: none;
-  position: relative;
 }
 
 .list {
