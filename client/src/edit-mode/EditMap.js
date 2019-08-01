@@ -79,29 +79,15 @@ export default class EditMap extends Component {
   }
 
   distance = e => {
-    // let gain = new Tone.Volume()
     this.state.space && this.setState({
       space: this.state.space.map(n => {
         let dist = Math.sqrt(Math.pow((n.position[0] - e.clientX), 2) + Math.pow((n.position[1] - e.clientY), 2))
         let zone = dist < 150
-        // console.log(n.synth)
         if (zone) {
           n.start = true;
-          // n.amp = ((150 - dist) / 150).toFixed(1)
-
-          // n.amp = gain(((150 - dist) / 150).toFixed(1))
-          // n.amp = new Tone.Volume(0)
-
-          // n.synth.chain(n.amp, Tone.Master)
           n.synth.triggerAttack(n.note);
-          // console.log(n.synth.envelope.value)
-
         } else {
           n.start = false;
-
-          // console.log(n.synth.envelope.value)
-          // n.amp = new Tone.Volume(-10)
-          // n.synth.chain(n.amp, Tone.Master)
           n.synth.triggerRelease();
         }
         return n
