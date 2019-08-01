@@ -177,15 +177,18 @@ export default class EditMap extends Component {
             Save
           </button>
         )}
-        {this.state.displayNoteName && this.state.space.length ? (
+
+        {/* DISPLAY / HIDE NOTES */}
+        {this.state.displayNoteName && this.state.space !== null ?
           <button className="cbutton6" onClick={this.displayNoteName}>
             Hide note
           </button>
-        ) : (
-            <button className="cbutton6" onClick={this.displayNoteName}>
-              Display note
+          : this.state.space !== null && <button className="cbutton6" onClick={this.displayNoteName}>
+            Display note
           </button>
-          )}
+        }
+        {/* DISPLAY / HIDE NOTES */}
+
         {this.state.showInputTitle && (
           <>
             <input
