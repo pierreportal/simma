@@ -150,7 +150,7 @@ export default class SpaceMap extends Component {
         onMouseMove={this.distance}
       >
         <ListOfSpaces />
-        <h4>
+        <h4 id="placename">
           {this.state.title} by {this.state.username}
         </h4>
 

@@ -484,3 +484,25 @@ h3 {
   bottom: 0;
   margin-bottom: 20px;
 }
+#likelist {
+  height: 60vh;
+  overflow-y: scroll;
+  list-style: none;
+  color: white;
+  width: 10vw;
+  right: 50px;
+  position: absolute;
+  z-index: 200;
+  font-size: 0.7rem;
+  top: 100px;
+  line-height: 1.2rem;
+  text-decoration-style: none;
+  opacity: 0.65;
+ }
+ #placename {
+  z-index: 200;
+  position: absolute;
+  right: 100px;
+  top: 5px;
+  opacity: 0.65;
+ }

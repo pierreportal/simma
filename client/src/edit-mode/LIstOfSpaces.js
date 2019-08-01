@@ -20,7 +20,7 @@ export default class LIstOfSpaces extends Component {
       return <li key={x._id}><Link to={`/user/${x.ownerName}/${x.title}`}>{x.title} by {x.ownerName}</Link></li>
     })
     return (
-      <div>
+      <div id="likelist">
         <h4>Spaces</h4>
         <ul>
           {list}
