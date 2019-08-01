@@ -29,6 +29,10 @@ router.post('/:userName/new-space', (req, res) => {
   const removeSpaceFromUrl = (str) => {
     return str.split(" ").join("-")
   }
+
+  for (const node in space) {
+    delete space[node].synth;
+  }
   // console.log(space, spaceName)
   Space.create({ owner: req.user._id, nodes: space, title: removeSpaceFromUrl(spaceName), ownerName: req.user.username }).then(response => {
     res.json(response)

@@ -16,7 +16,10 @@ export default class EditMap extends Component {
 
   handleDelete = id => {
     this.setState({
-      space: this.state.space.filter(x => x.id !== id)
+      space: this.state.space.filter(x => {
+        x.synth.triggerRelease();
+        return x.id !== id
+      })
     })
   }
 
@@ -27,7 +30,11 @@ export default class EditMap extends Component {
     // this.props.activateKeys(generatedScale)
     this.state.space ?
       this.setState({
-        space: this.state.space.concat(generatedScale).map(n => n.synth.triggerAttack(n.note)),
+        space: this.state.space.concat(generatedScale).map(n => {
+
+          return { ...n, synth: new Tone.MonoSynth(n.flavor).toMaster() }
+          // return n.synth.triggerAttack(n.note)
+        }),
       }) : this.setState({
         space: generatedScale,
       }, () => {
@@ -63,6 +70,9 @@ export default class EditMap extends Component {
 
   saveSpace = () => {
     console.log(this.state)
+    const space = { ...this.state.space }
+
+
     axios.post(`/user/${this.props.user.username}/new-space`, this.state).then(() => {
       console.log('done');
       this.setState({ showInputTitle: false })
@@ -75,6 +85,7 @@ export default class EditMap extends Component {
       space: this.state.space.map(n => {
         let dist = Math.sqrt(Math.pow((n.position[0] - e.clientX), 2) + Math.pow((n.position[1] - e.clientY), 2))
         let zone = dist < 150
+        // console.log(n.synth)
         if (zone) {
           n.start = true;
           // n.amp = ((150 - dist) / 150).toFixed(1)

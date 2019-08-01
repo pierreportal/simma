@@ -3,9 +3,57 @@ const notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
 const accidentals = ['#', 'n', 'b']
 //(♯), flat (♭), and natural (♮)
 const octaves = [1, 2, 3, 4, 5]
-const flavors = ['vanilla', 'mint', 'grappe']
 const Tone = require("tone")
+const flavors = ['vanilla', 'mint', 'grappe']
 
+
+const flavorsObj = {
+    'vanilla': {
+        "oscillator": {
+            "type": "sawtooth"
+        },
+        "envelope": {
+            "attack": 0.1,
+            "release": 0.2
+        },
+        "filterEnvelope": {
+            "attack": 0.9,
+            "decay": 0.4,
+            "sustain": .7,
+            "release": 0.4
+        }
+    },
+    'mint': {
+        "oscillator": {
+            "type": "square"
+        },
+        "envelope": {
+            "attack": 0.1,
+            "release": 0.2
+        },
+        "filterEnvelope": {
+            "attack": 0.9,
+            "decay": 0.4,
+            "sustain": .7,
+            "release": 0.4
+        }
+    },
+    'grappe': {
+        "oscillator": {
+            "type": "triangle"
+        },
+        "envelope": {
+            "attack": 0.1,
+            "release": 0.2
+        },
+        "filterEnvelope": {
+            "attack": 0.9,
+            "decay": 0.4,
+            "sustain": .7,
+            "release": 0.4
+        }
+    }
+}
 
 
 
@@ -38,25 +86,10 @@ class Greek {
                 // amp: 0.,
                 // amp: new Tone.Gain(3),
 
-                flavor: flavor,
+                flavor: flavorsObj[flavor],
                 actave: ove,
 
-                synth: new Tone.MonoSynth({
-                    "oscillator": {
-                        "type": "sawtooth"
-                    },
-                    "envelope": {
-                        "attack": 0.1,
-                        "release": 0.2
-                    },
-                    "filterEnvelope": {
-                        "attack": 0.9,
-                        "decay": 0.4,
-                        "sustain": .7,
-                        "release": 0.4
-                    }
-
-                }).toMaster()
+                synth: new Tone.MonoSynth(flavorsObj[flavor]).toMaster()
                 // ;
             }
         });
