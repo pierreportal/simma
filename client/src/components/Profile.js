@@ -42,13 +42,13 @@ export default class Profile extends Component {
       <div className="portfolio">
         <div className="list">
           {/* <h2>{this.state.user.username}</h2> */}
+          <LikedSpaces user={this.state.user} />
           <div>
             <h2>My spaces</h2>
 
             {portfolio}
             {/* {otherSpaces} */}
             <Colorback />
-            <LikedSpaces user={this.state.user} />
             <Arrows />
           </div>
         </div>

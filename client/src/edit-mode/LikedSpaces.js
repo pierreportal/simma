@@ -18,7 +18,7 @@ export default class LikedSpaces extends Component {
       return <li key={x._id}><Link to={`/user/${x.ownerName}/${x.title}`}>{x.title} by {x.ownerName}</Link></li>
     })
     return (
-      <div>
+      <div id="favoritelist">
         <h4>Liked spaces</h4>
         <ul>
           {list}

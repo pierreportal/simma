@@ -524,3 +524,37 @@ h3 {
   height: 10px;
   border-radius: 50%;
  }
+ #favoritelist {
+  height: 60vh;
+  overflow-y: scroll;
+  list-style: none;
+  color: white;
+  width: 10vw;
+  left: 50px;
+  position: absolute;
+  z-index: 200;
+  font-size: 0.7rem;
+  top: 0px;
+  line-height: 1.2rem;
+  text-decoration-style: none;
+  opacity: 0.65;
+ }
+ .likebutton {
+  position: absolute;
+  z-index: 250;
+  top: 100px;
+  width: 100px;
+  font-family: "pressura_light";
+  display: block;
+  border-radius: 0em;
+  height: 20px;
+  position: absolute;
+  background-color: transparent;
+  color: white;
+  left: 42.4%;
+  top: 60px;
+  width: 15%;
+ }
+ .pointer {
+  cursor: none;
+ }

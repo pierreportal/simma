@@ -14,7 +14,8 @@ export default class SpaceMap extends Component {
     nodes: [],
     ownerName: "",
     spaceId: "",
-    mouseDown: false
+    mouseDown: false,
+    bookmarked: null
   };
   // ############################################### mouse down / up --> ALL GOOD
   mouseDown = () => {
@@ -61,6 +62,9 @@ export default class SpaceMap extends Component {
 
   // ############################################### like Space --> ALL GOOD
   handleBookmark = () => {
+    // this.setState({
+    //   bookmarked: true
+    // })
     axios
       .post(`/api/user/${this.state.username}/like-space`, {
         spaceId: this.state.spaceId,
@@ -72,6 +76,9 @@ export default class SpaceMap extends Component {
       .catch(err => console.log(err));
   };
   handleUnlike = () => {
+    // this.setState({
+    //   bookmarked: false
+    // })
     axios
       .post(`/api/user/${this.state.username}/unlike-space`, {
         spaceId: this.state.spaceId,
@@ -143,7 +150,7 @@ export default class SpaceMap extends Component {
 
     return (
       <div
-        className="map"
+        className="map pointer"
         style={{ width: "100vw", height: "100vh" }}
         onMouseDown={this.mouseDown}
         onMouseUp={this.mouseUp}
@@ -156,9 +163,9 @@ export default class SpaceMap extends Component {
 
         {this.state.ownerName !== this.props.user.username ? (
           !this.props.user.favoriteSpaces.includes(this.state.spaceId) ? (
-            <button onClick={this.handleBookmark}>Like</button>
+            <button className="likebutton" onClick={this.handleBookmark}>Add to favorites</button>
           ) : (
-              <button onClick={this.handleUnlike}>Unlike</button>
+              <button className="likebutton" onClick={this.handleUnlike}>Remove from favorites</button>
             )
         ) : null}
 
