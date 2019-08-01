@@ -27,7 +27,6 @@ export default class EditMap extends Component {
     const univers = new Greek();
     const generatedScale = univers.scale(rootNote, accidental, octave, scale, flavor);
     console.log(generatedScale)
-    // this.props.activateKeys(generatedScale)
     this.state.space ?
       this.setState({
         space: this.state.space.concat(generatedScale).map(n => {
@@ -37,13 +36,7 @@ export default class EditMap extends Component {
         }),
       }) : this.setState({
         space: generatedScale,
-      }, () => {
-        // this.state.space.map(n => {
-        //   return n.synth.triggerAttack(n.note);
-        // })
-      })
-    // this.state.space
-
+      });
   }
 
   move = (e, id) => {
@@ -69,11 +62,17 @@ export default class EditMap extends Component {
   }
 
   saveSpace = () => {
-    console.log(this.state)
-    const space = { ...this.state.space }
+    // console.log(this.state)
 
 
-    axios.post(`/user/${this.props.user.username}/new-space`, this.state).then(() => {
+
+    const space = []
+    for (const node in this.state.space) {
+      const { synth, ...rest } = this.state.space[node]
+      space.push(rest)
+    }
+    console.log(space)
+    axios.post(`/user/${this.props.user.username}/new-space`, { ...this.state, space }).then(() => {
       console.log('done');
       this.setState({ showInputTitle: false })
     }).catch(err => console.log(err))
