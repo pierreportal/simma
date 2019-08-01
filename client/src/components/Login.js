@@ -9,7 +9,6 @@ export default class Login extends Component {
     password: ""
   };
   handleChange = e => {
-    console.log(e.target.value);
     const name = e.target.name;
     const value = e.target.value;
     this.setState({
