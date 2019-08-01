@@ -36,20 +36,20 @@ export default class SpaceMap extends Component {
   };
 
   distance = e => {
-    console.log("mo");
+    // console.log("mo");
     this.state.mouseDown &&
       this.state.nodes &&
       this.setState({
         nodes: this.state.nodes.map(n => {
           let dist = Math.sqrt(
             Math.pow(n.position[0] - e.clientX, 2) +
-              Math.pow(n.position[1] - e.clientY, 2)
+            Math.pow(n.position[1] - e.clientY, 2)
           );
           let zone = dist < 150;
           if (zone) {
             n.start = true;
             n.synth.triggerAttack(n.note);
-            console.log(n);
+            // console.log(n);
           } else {
             n.start = false;
             n.synth.triggerRelease();
@@ -85,7 +85,7 @@ export default class SpaceMap extends Component {
 
   // ############################################### Edit Space --> TO DO
   handleEditSpace = () => {
-    console.log("Go in edit mode");
+    // console.log("Go in edit mode");
   };
   componentDidMount = () => {
     this.load();
@@ -101,13 +101,13 @@ export default class SpaceMap extends Component {
   };
 
   load = () => {
-    console.log("LOADING");
+    // console.log("LOADING");
     const { userName, spaceName } = this.props.match.params;
     this.setState({ username: userName });
     axios
       .get(`/user/${userName}/${spaceName}`)
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         this.setState(
           {
             title: response.data[0].title,
@@ -153,15 +153,15 @@ export default class SpaceMap extends Component {
         <h4>
           {this.state.title} by {this.state.username}
         </h4>
-        ​
+
         {this.state.ownerName !== this.props.user.username ? (
           !this.props.user.favoriteSpaces.includes(this.state.spaceId) ? (
             <button onClick={this.handleBookmark}>Like</button>
           ) : (
-            <button onClick={this.handleUnlike}>Unlike</button>
-          )
+              <button onClick={this.handleUnlike}>Unlike</button>
+            )
         ) : null}
-        ​
+
         {this.state.ownerName === this.props.user.username && (
           <Link
             to={`/user/${this.state.username}/edit-space/${this.state.spaceId}`}
