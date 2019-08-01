@@ -8,52 +8,71 @@ const flavors = ['vanilla', 'mint', 'grappe']
 
 
 const flavorsObj = {
-    'vanilla': {
-        "oscillator": {
-            "type": "sawtooth"
+    vanilla: {
+        oscillator: {
+            type: "sawtooth"
         },
-        "envelope": {
-            "attack": 0.1,
-            "release": 0.2
+        envelope: {
+            attack: 0.1,
+            release: 0.2
         },
-        "filterEnvelope": {
-            "attack": 0.9,
-            "decay": 0.4,
-            "sustain": .7,
-            "release": 0.4
+        filterEnvelope: {
+            attack: 0.9,
+            decay: 0.4,
+            sustain: 0.7,
+            release: 0.4
         }
     },
-    'mint': {
-        "oscillator": {
-            "type": "square"
+    mint: {
+        oscillator: {
+            type: "fatsquare3",
+            count: 2,
+            detune: -0.2,
+            spread: 40
         },
-        "envelope": {
-            "attack": 0.1,
-            "release": 0.2
+        envelope: {
+            attack: 1.4,
+            decay: 0.5,
+            sustain: 0.9,
+            release: 1.7
         },
-        "filterEnvelope": {
-            "attack": 0.9,
-            "decay": 0.4,
-            "sustain": .7,
-            "release": 0.4
+        filter: {
+            type: "peaking",
+            q: 0.2,
+            gain: 2,
+            frequency: 0.01
+        },
+        filterEnvelope: {
+            attack: 0.00009,
+            decay: 0.00004,
+            sustain: 0.007,
+            release: 0.9
         }
     },
-    'grappe': {
-        "oscillator": {
-            "type": "triangle"
+    grappe: {
+        oscillator: {
+            type: "fatsawtooth12",
+            count: 2,
+            detune: 6
         },
-        "envelope": {
-            "attack": 0.1,
-            "release": 0.2
+        envelope: {
+            attack: 0.6,
+            decay: 1.5,
+            decayCurve: "exponential",
+            release: 0.9
         },
-        "filterEnvelope": {
-            "attack": 0.9,
-            "decay": 0.4,
-            "sustain": .7,
-            "release": 0.4
+        filter: {
+            type: "lowpass"
+        },
+        filterEnvelope: {
+            attack: 0.03,
+            decay: 1.7,
+            sustain: 0.0007,
+            release: 1.4,
+            octaves: 5
         }
     }
-}
+};
 
 
 
