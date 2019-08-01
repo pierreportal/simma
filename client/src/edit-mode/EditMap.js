@@ -11,7 +11,8 @@ export default class EditMap extends Component {
     showInputTitle: false,
     showInstruction: true,
     spaceName: '',
-    soundComponents: []
+    soundComponents: [],
+    displayNoteName: false
   }
 
   handleDelete = id => {
@@ -100,13 +101,18 @@ export default class EditMap extends Component {
       showInstruction: false
     })
   }
+  displayNoteName = () => {
+    this.setState({
+      displayNoteName: !this.state.displayNoteName
+    })
+  }
 
   render() {
 
     const nodes = this.state.space && this.state.space.map(n => {
       let nodeStyle = {
-        width: 6,
-        height: 6,
+        width: 10,
+        height: 10,
         backgroundColor: 'lightcoral',
         borderRadius: '50%',
         position: 'absolute',
@@ -121,7 +127,7 @@ export default class EditMap extends Component {
 
           <div style={nodeStyle}>
             <button style={{ border: 'none', background: 'none', margin: '6px' }} onClick={() => this.handleDelete(n.id)} >x</button>
-            <p>{String(n.note)}</p>
+            {this.state.displayNoteName && <p>{String(n.note)}</p>}
           </div>
 
         </Draggable>
@@ -133,6 +139,7 @@ export default class EditMap extends Component {
         {this.state.showInstruction && <h3 style={{ marginTop: '160px' }}>create your scale here</h3>}
         <GenerateScaleBtn generateScale={this.generateScale} />
         {this.state.space && <button onClick={this.save}>Save</button>}
+        {(this.state.displayNoteName && this.state.space.length) ? <button onClick={this.displayNoteName}>Hide note</button> : <button onClick={this.displayNoteName}>Display note</button>}
         {this.state.showInputTitle && <><input name="spaceName" onChange={this.nameSpace} type="text" placeholder="Name your space" /> <button onClick={this.saveSpace}>Done</button></>}
         {nodes}
         {this.state.soundComponents && this.state.soundComponents}
