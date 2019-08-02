@@ -1,6 +1,6 @@
 import React from "react";
 import Lottie from "react-lottie";
-import animationData from "./icon.json";
+import animationData from "./icon3.json";
 
 export default class Animation extends React.Component {
   constructor(props) {
@@ -27,30 +27,28 @@ export default class Animation extends React.Component {
       <div>
         <Lottie
           options={defaultOptions}
-          top={200}
-          height={400}
-          width={400}
+          height={"100vh"}
           isStopped={this.state.isStopped}
           isPaused={this.state.isPaused}
         />
         {/* <button
-          style={buttonStyle}
-          onClick={() => this.setState({ isStopped: true })}
-        >
-          stop
-        </button>
-        <button
-          style={buttonStyle}
-          onClick={() => this.setState({ isStopped: false })}
-        >
-          play
-        </button>
-        <button
-          style={buttonStyle}
-          onClick={() => this.setState({ isPaused: !this.state.isPaused })}
-        >
-          pause
-        </button> */}
+         style={buttonStyle}
+         onClick={() => this.setState({ isStopped: true })}
+       >
+         stop
+       </button>
+       <button
+         style={buttonStyle}
+         onClick={() => this.setState({ isStopped: false })}
+       >
+         play
+       </button>
+       <button
+         style={buttonStyle}
+         onClick={() => this.setState({ isPaused: !this.state.isPaused })}
+       >
+         pause
+       </button> */}
       </div>
     );
   }
